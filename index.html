@@ -30,6 +30,10 @@
       --blue: #2563eb;
       --blue-soft: #dbeafe;
 
+      --gold: #f59e0b;
+      --silver: #94a3b8;
+      --bronze: #b45309;
+
       --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
       --radius: 22px;
     }
@@ -304,7 +308,7 @@
 
     .leaderboard-list {
       display: grid;
-      gap: 10px;
+      gap: 12px;
       margin-top: 12px;
     }
 
@@ -312,11 +316,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 14px;
       border: 2px solid var(--line);
       border-radius: 18px;
       background: #fff;
+    }
+
+    .leaderboard-row.gold {
+      background: #fffbeb;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+
+    .leaderboard-row.silver {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.12);
+    }
+
+    .leaderboard-row.bronze {
+      background: #fff7ed;
+      border-color: #b45309;
+      box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
     }
 
     .leaderboard-rank {
@@ -324,6 +346,10 @@
       min-width: 34px;
       font-size: 18px;
     }
+
+    .leaderboard-rank.gold { color: var(--gold); }
+    .leaderboard-rank.silver { color: var(--silver); }
+    .leaderboard-rank.bronze { color: var(--bronze); }
 
     .leaderboard-meta {
       color: var(--muted);
@@ -397,7 +423,7 @@
     <section class="section" id="section-highscore">
       <div class="card">
         <div style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Gemensam highscore</div>
-        <div style="color: var(--muted); font-size: 14px;">Bästa resultat från alla som använder appen.</div>
+        <div style="color: var(--muted); font-size: 14px;">Bästa resultat per spelare.</div>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </section>
@@ -414,7 +440,7 @@
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_clean_v2";
+    const STORAGE_KEY = "puttingbana_clean_v3";
 
     const HOLES = [
       [23, 14, 7],
@@ -425,7 +451,7 @@
       [15, 11, 8],
       [13, 10, 6],
       [12, 8, 7],
-      [11, 7, 6],
+      [11, 8, 6],
       [11, 7, 5],
       [10, 7, 5],
       [15, 9, 6],
@@ -633,6 +659,38 @@
       `;
     }
 
+    function getBestPerPlayer(rows) {
+      const bestMap = new Map();
+
+      rows.forEach((row) => {
+        const player = (row.name || "Anonym").trim();
+        const existing = bestMap.get(player);
+
+        if (!existing) {
+          bestMap.set(player, row);
+          return;
+        }
+
+        if (row.score > existing.score) {
+          bestMap.set(player, row);
+          return;
+        }
+
+        if (row.score === existing.score) {
+          const rowDate = new Date(row.created_at).getTime();
+          const existingDate = new Date(existing.created_at).getTime();
+          if (rowDate < existingDate) {
+            bestMap.set(player, row);
+          }
+        }
+      });
+
+      return Array.from(bestMap.values()).sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return new Date(a.created_at) - new Date(b.created_at);
+      });
+    }
+
     async function loadLeaderboard() {
       const list = document.getElementById("leaderboardList");
       list.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
@@ -640,9 +698,7 @@
       const { data, error } = await db
         .from("scores")
         .select("id, score, created_at, name, played_at")
-        .order("score", { ascending: false })
-        .order("created_at", { ascending: true })
-        .limit(20);
+        .order("created_at", { ascending: true });
 
       if (error) {
         list.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda highscore: ${error.message}</div>`;
@@ -654,16 +710,21 @@
         return;
       }
 
+      const rows = getBestPerPlayer(data).slice(0, 20);
+
       list.innerHTML = "";
-      data.forEach((row, index) => {
+      rows.forEach((row, index) => {
         const player = row.name || "Anonym";
         const date = row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE");
 
+        const medalClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : "";
+        const medalEmoji = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`;
+
         const item = document.createElement("div");
-        item.className = "leaderboard-row";
+        item.className = `leaderboard-row ${medalClass}`;
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:12px;">
-            <div class="leaderboard-rank">#${index + 1}</div>
+            <div class="leaderboard-rank ${medalClass}">${medalEmoji}</div>
             <div>
               <div style="font-weight:800;">${player}</div>
               <div class="leaderboard-meta">${date}</div>
