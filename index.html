@@ -7,28 +7,32 @@
   <title>Puttingbana</title>
 
   <style>
-:root {
-  --bg: #f6f8fb;
-  --card: #ffffff;
-  --line: #cbd5e1;
-  --text: #0f172a;
-  --muted: #64748b;
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --line: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #0f172a;
 
-  --green: #22c55e;
-  --green-strong: #16a34a;
-  --green-soft: #dcfce7;
+      --green: #22c55e;
+      --green-strong: #16a34a;
+      --green-soft: #dcfce7;
 
-  --red: #ef4444;
-  --red-strong: #dc2626;
-  --red-soft: #fee2e2;
+      --red: #ef4444;
+      --red-strong: #dc2626;
+      --red-soft: #fee2e2;
 
-  --yellow: #facc15;
-  --yellow-strong: #eab308;
-  --yellow-soft: #fef3c7;
+      --yellow: #facc15;
+      --yellow-strong: #eab308;
+      --yellow-soft: #fef3c7;
 
-  --blue: #2563eb;
-  --blue-soft: #dbeafe;
-}
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+
+      --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      --radius: 22px;
+    }
 
     * { box-sizing: border-box; }
 
@@ -40,7 +44,7 @@
     }
 
     .app {
-      max-width: 860px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 18px 14px 40px;
     }
@@ -50,7 +54,7 @@
     }
 
     .title {
-      font-size: 44px;
+      font-size: 38px;
       font-weight: 800;
       line-height: 1;
       margin-bottom: 8px;
@@ -58,7 +62,7 @@
 
     .subtitle {
       color: var(--muted);
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.35;
       margin-bottom: 14px;
     }
@@ -67,10 +71,10 @@
       background: #eef5ff;
       border: 1px solid #bfd7ff;
       color: #1e3a8a;
-      border-radius: 22px;
-      padding: 14px 16px;
+      border-radius: 20px;
+      padding: 12px 14px;
       line-height: 1.35;
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 14px;
     }
 
@@ -85,11 +89,11 @@
     .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
 
     .btn {
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       background: #fff;
       color: var(--text);
-      border-radius: 20px;
-      min-height: 58px;
+      border-radius: 18px;
+      min-height: 56px;
       padding: 12px 16px;
       font-size: 16px;
       font-weight: 700;
@@ -103,10 +107,6 @@
       border-color: var(--primary);
     }
 
-    .tabs .btn {
-      min-height: 52px;
-    }
-
     .tabs .btn.active {
       background: var(--primary);
       color: #fff;
@@ -115,7 +115,7 @@
 
     .card {
       background: var(--card);
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 16px;
@@ -123,12 +123,12 @@
 
     .summary-card .label {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 8px;
     }
 
     .summary-card .value {
-      font-size: 34px;
+      font-size: 30px;
       font-weight: 800;
       line-height: 1;
       margin-bottom: 6px;
@@ -136,15 +136,34 @@
 
     .summary-card .sub {
       color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .field-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
       font-size: 14px;
     }
 
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
+    .field input {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 2px solid var(--line);
+      padding: 12px 14px;
+      font-size: 16px;
+      background: #fff;
+      color: var(--text);
     }
 
     .hole-card {
@@ -152,18 +171,16 @@
       transition: 0.2s ease;
     }
 
-      .hole-card.hattrick {
-  background: #fef3c7;
-  border: 3px solid #eab308;
-  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.6);
-}
+    .hole-card.hattrick {
+      background: var(--yellow-soft);
+      border: 3px solid var(--yellow-strong);
+      box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.45);
     }
 
-      .hole-card.bom {
-  background: #fee2e2;
-  border: 3px solid #dc2626;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.5);
-}
+    .hole-card.bom {
+      background: var(--red-soft);
+      border: 3px solid var(--red-strong);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.35);
     }
 
     .hole-header {
@@ -175,7 +192,7 @@
     }
 
     .hole-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
     }
 
@@ -187,36 +204,47 @@
     }
 
     .badge {
-      padding: 10px 14px;
+      padding: 9px 12px;
       border-radius: 999px;
       font-weight: 800;
-      font-size: 14px;
-      border: 1px solid var(--line);
+      font-size: 13px;
+      border: 2px solid var(--line);
       background: #f1f5f9;
     }
 
-    .badge.gold {
+    .badge.hattrick {
       background: #fff1b8;
-      border-color: #ffe08a;
+      border-color: #eab308;
+      color: #854d0e;
     }
 
-    .badge.red {
+    .badge.bom {
       background: #ffd6d6;
-      border-color: #ffb3b3;
+      border-color: #dc2626;
       color: #991b1b;
     }
 
     .putt-card {
-      background: #f7fafc;
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      background: #f8fafc;
+      border: 2px solid var(--line);
+      border-radius: 20px;
       padding: 14px;
       margin-bottom: 12px;
     }
 
+    .putt-card.hit {
+      background: var(--green-soft);
+      border-color: #86efac;
+    }
+
+    .putt-card.miss {
+      background: var(--red-soft);
+      border-color: #fca5a5;
+    }
+
     .distance {
       text-align: center;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       margin-bottom: 12px;
     }
@@ -225,39 +253,53 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .hit-btn,
-    .miss-btn,
-    .reset-btn {
-      min-height: 64px;
-      border-radius: 20px;
-      font-size: 18px;
+    .btn-hit,
+    .btn-miss,
+    .btn-reset {
+      min-height: 60px;
+      border-radius: 18px;
+      font-size: 17px;
       font-weight: 800;
-      border: 2px solid var(--line);
+      border: 3px solid var(--line);
       background: #fff;
       cursor: pointer;
     }
 
-    .hit-btn.active {
-      background: #4caf50;
-      color: #fff;
-      border-color: #4caf50;
-      box-shadow: 0 0 0 4px rgba(76,175,80,0.12);
+    .btn-hit {
+      background: #ffffff;
+      color: var(--green-strong);
+      border-color: #86efac;
     }
 
-    .miss-btn.active {
-      background: #e74c3c;
-      color: #fff;
-      border-color: #e74c3c;
-      box-shadow: 0 0 0 4px rgba(231,76,60,0.12);
+    .btn-hit.active {
+      background: var(--green);
+      color: white;
+      border-color: var(--green-strong);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
     }
 
-    .reset-btn {
+    .btn-miss {
+      background: #ffffff;
+      color: var(--red-strong);
+      border-color: #fca5a5;
+    }
+
+    .btn-miss.active {
+      background: var(--red);
+      color: white;
+      border-color: var(--red-strong);
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
+    }
+
+    .btn-reset {
       width: 100%;
-      min-height: 54px;
+      min-height: 50px;
       background: #fff;
+      color: var(--blue);
+      border: 2px solid var(--line);
     }
 
     .leaderboard-list {
@@ -272,14 +314,15 @@
       align-items: center;
       gap: 10px;
       padding: 14px;
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       border-radius: 18px;
       background: #fff;
     }
 
     .leaderboard-rank {
       font-weight: 800;
-      min-width: 30px;
+      min-width: 34px;
+      font-size: 18px;
     }
 
     .leaderboard-meta {
@@ -299,10 +342,11 @@
       margin-top: 18px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
       .grid-3 { grid-template-columns: 1fr; }
-      .title { font-size: 34px; }
+      .field-grid { grid-template-columns: 1fr; }
+      .title { font-size: 32px; }
     }
   </style>
 </head>
@@ -312,7 +356,7 @@
       <div class="title">Puttingbana</div>
       <div class="subtitle">18 hål, 54 puttar, HATTRICK, BOM och gemensam highscore.</div>
       <div class="help">
-        När sidan ligger online: öppna i <strong>Safari</strong> och välj <strong>Dela → Lägg till på hemskärmen</strong>.
+        Öppna i <strong>Safari</strong> och välj <strong>Dela → Lägg till på hemskärmen</strong> om du vill använda den som app på iPhone.
       </div>
     </div>
 
@@ -330,11 +374,19 @@
     <div class="row grid-4" id="summaryCards"></div>
 
     <section class="section active" id="section-round">
-<div class="card" style="margin-bottom: 16px;">
-  <label for="playerName" style="display:block; font-weight:700; margin-bottom:6px;">Namn</label>
-  <input id="playerName" type="text" placeholder="Skriv namn"
-    style="width:100%; min-height:52px; border-radius:16px; border:1px solid var(--line); padding:12px 14px; font-size:16px;">
-</div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="field-grid">
+          <div class="field">
+            <label for="playerName">Namn</label>
+            <input id="playerName" type="text" placeholder="Skriv namn">
+          </div>
+          <div class="field">
+            <label for="playedAt">Datum</label>
+            <input id="playedAt" type="date">
+          </div>
+        </div>
+      </div>
+
       <div id="holesContainer"></div>
     </section>
 
@@ -351,45 +403,45 @@
     </section>
 
     <div class="footer-note">
-      Lokal spelstatus sparas i mobilen. Highscore sparas också online via 
+      Lokal spelstatus sparas i mobilen. Highscore sparas också online via Supabase.
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const db = window.supabase.createClient(
-      "https://izihmzhfnhqwtmuncdfj.co",
+      "https://izihmzhfnhqwtmuncdfj.supabase.co",
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_clean_v1";
+    const STORAGE_KEY = "puttingbana_clean_v2";
 
     const HOLES = [
-      [23,14,7],
-      [16,10,6],
-      [20,12,8],
-      [18,11,7],
-      [22,14,9],
-      [17,10,6],
-      [21,13,8],
-      [19,12,7],
-      [24,15,9],
-      [15,9,5],
-      [20,11,7],
-      [18,10,6],
-      [22,13,8],
-      [16,11,7],
-      [21,14,8],
-      [19,11,6],
-      [23,13,8],
-      [17,10,5]
+      [23, 14, 7],
+      [16, 10, 6],
+      [20, 15, 8],
+      [17, 12, 5],
+      [16, 11, 8],
+      [15, 11, 8],
+      [13, 10, 6],
+      [12, 8, 7],
+      [11, 8, 6],
+      [11, 7, 5],
+      [10, 7, 5],
+      [15, 9, 6],
+      [13, 9, 6],
+      [12, 5, 7],
+      [12, 9, 6],
+      [12, 7, 8],
+      [12, 9, 6],
+      [14, 10, 6]
     ];
-
-    let state = loadState();
 
     function createNewState() {
       return {
         createdAt: new Date().toISOString(),
+        playerName: "",
+        playedAt: new Date().toISOString().slice(0, 10),
         holes: HOLES.map(distances => ({
           distances,
           results: [null, null, null]
@@ -401,11 +453,20 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return createNewState();
       try {
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        return {
+          playerName: parsed.playerName || "",
+          playedAt: parsed.playedAt || new Date().toISOString().slice(0, 10),
+          createdAt: parsed.createdAt || new Date().toISOString(),
+          holes: Array.isArray(parsed.holes) ? parsed.holes : createNewState().holes
+        };
       } catch {
         return createNewState();
       }
     }
+
+    let state = loadState();
+    let activeTab = "round";
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -434,21 +495,22 @@
       let bombs = 0;
 
       state.holes.forEach(hole => {
-        const [r1, r2, r3] = hole.results;
-        const holeMade = hole.results.filter(v => v === true).length;
-        const holeMiss = hole.results.filter(v => v === false).length;
+        const made = hole.results.filter(v => v === true).length;
+        const missed = hole.results.filter(v => v === false).length;
 
-        if (holeMade === 3) hattricks++;
-        if (holeMiss === 3) bombs++;
+        if (made === 3) hattricks++;
+        if (missed === 3) bombs++;
 
         hole.results.forEach((res, index) => {
           if (res !== null) totalAttempts++;
           if (res === true) totalMade++;
 
-          if (index < 2) {
+          const distance = hole.distances[index];
+          if (distance >= 5 && distance <= 10) {
             if (res !== null) c1Attempts++;
             if (res === true) c1Made++;
-          } else {
+          }
+          if (distance >= 11 && distance <= 23) {
             if (res !== null) c2Attempts++;
             if (res === true) c2Made++;
           }
@@ -504,37 +566,37 @@
       state.holes.forEach((hole, holeIndex) => {
         const made = hole.results.filter(v => v === true).length;
         const missed = hole.results.filter(v => v === false).length;
+
         const holeCard = document.createElement("div");
         holeCard.className = "card hole-card" +
           (made === 3 ? " hattrick" : "") +
           (missed === 3 ? " bom" : "");
 
-        const badgeHtml = `
-          <div class="badges">
-            <div class="badge">${made}/3</div>
-            ${made === 3 ? `<div class="badge gold">🏆 HATTRICK</div>` : ""}
-            ${missed === 3 ? `<div class="badge red">💥 BOM</div>` : ""}
-          </div>
-        `;
-
         holeCard.innerHTML = `
           <div class="hole-header">
             <div class="hole-title">Hål ${holeIndex + 1}</div>
-            ${badgeHtml}
+            <div class="badges">
+              <div class="badge">${made}/3</div>
+              ${made === 3 ? `<div class="badge hattrick">🏆 HATTRICK</div>` : ""}
+              ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
+            </div>
           </div>
         `;
 
         hole.distances.forEach((distance, puttIndex) => {
           const result = hole.results[puttIndex];
           const puttCard = document.createElement("div");
-          puttCard.className = "putt-card";
+          puttCard.className = "putt-card" +
+            (result === true ? " hit" : "") +
+            (result === false ? " miss" : "");
+
           puttCard.innerHTML = `
             <div class="distance">${distance} m</div>
             <div class="putt-actions">
-              <button class="hit-btn ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
-              <button class="miss-btn ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+              <button class="btn-hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+              <button class="btn-miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
             </div>
-            <button class="reset-btn" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+            <button class="btn-reset" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
           `;
           holeCard.appendChild(puttCard);
         });
@@ -542,7 +604,7 @@
         wrap.appendChild(holeCard);
       });
 
-      wrap.querySelectorAll("button").forEach(btn => {
+      wrap.querySelectorAll("button[data-hole]").forEach(btn => {
         btn.addEventListener("click", () => {
           const hole = Number(btn.dataset.hole);
           const putt = Number(btn.dataset.putt);
@@ -557,9 +619,8 @@
 
     function renderOverview() {
       const stats = getStats();
-      const wrap = document.getElementById("overviewCard");
-      wrap.innerHTML = `
-        <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Översikt</div>
+      document.getElementById("overviewCard").innerHTML = `
+        <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Översikt</div>
         <div style="display:grid; gap:10px;">
           <div>Satta puttar: <strong>${stats.totalMade}</strong></div>
           <div>Försök: <strong>${stats.totalAttempts}</strong></div>
@@ -576,9 +637,9 @@
       const list = document.getElementById("leaderboardList");
       list.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
 
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from("scores")
-        .select("id, score, created_at")
+        .select("id, score, created_at, name, played_at")
         .order("score", { ascending: false })
         .order("created_at", { ascending: true })
         .limit(20);
@@ -595,14 +656,16 @@
 
       list.innerHTML = "";
       data.forEach((row, index) => {
-        const date = new Date(row.created_at).toLocaleString("sv-SE");
+        const player = row.name || "Anonym";
+        const date = row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE");
+
         const item = document.createElement("div");
         item.className = "leaderboard-row";
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:12px;">
             <div class="leaderboard-rank">#${index + 1}</div>
             <div>
-              <div style="font-weight:800;">Resultat</div>
+              <div style="font-weight:800;">${player}</div>
               <div class="leaderboard-meta">${date}</div>
             </div>
           </div>
@@ -615,10 +678,12 @@
     async function saveCurrentScoreToHighscore() {
       const stats = getStats();
       const score = stats.totalMade;
+      const name = (state.playerName || "").trim() || "Anonym";
+      const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
 
-      const { error } = await supabase
+      const { error } = await db
         .from("scores")
-        .insert([{ score }]);
+        .insert([{ score, name, played_at }]);
 
       if (error) {
         alert("Fel när highscore skulle sparas: " + error.message);
@@ -630,6 +695,8 @@
     }
 
     function activateTab(tabName) {
+      activeTab = tabName;
+
       document.querySelectorAll(".tabs .btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.tab === tabName);
       });
@@ -640,13 +707,21 @@
 
       document.getElementById("section-" + tabName).classList.add("active");
 
-      if (tabName === "highscore") loadLeaderboard();
+      if (tabName === "highscore") {
+        loadLeaderboard();
+      }
     }
 
     function renderAll() {
       renderSummary();
       renderHoles();
       renderOverview();
+
+      const playerNameInput = document.getElementById("playerName");
+      const playedAtInput = document.getElementById("playedAt");
+
+      if (playerNameInput) playerNameInput.value = state.playerName || "";
+      if (playedAtInput) playedAtInput.value = state.playedAt || new Date().toISOString().slice(0, 10);
     }
 
     document.getElementById("newRoundBtn").addEventListener("click", () => {
@@ -660,6 +735,16 @@
 
     document.querySelectorAll(".tabs .btn").forEach(btn => {
       btn.addEventListener("click", () => activateTab(btn.dataset.tab));
+    });
+
+    document.getElementById("playerName").addEventListener("input", (e) => {
+      state.playerName = e.target.value;
+      saveState();
+    });
+
+    document.getElementById("playedAt").addEventListener("input", (e) => {
+      state.playedAt = e.target.value;
+      saveState();
     });
 
     renderAll();
