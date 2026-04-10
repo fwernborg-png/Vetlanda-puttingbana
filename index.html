@@ -386,8 +386,9 @@
       </div>
     </div>
 
-    <div class="row grid-2">
+    <div class="row grid-3">
       <button class="btn primary" id="newRoundBtn">Ny runda</button>
+      <button class="btn" id="clearRoundBtn">Rensa runda</button>
       <button class="btn" id="saveHighscoreBtn">Spara till gemensam highscore</button>
     </div>
 
@@ -440,7 +441,7 @@
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_clean_v3";
+    const STORAGE_KEY = "puttingbana_clean_v4";
 
     const HOLES = [
       [23, 14, 7],
@@ -468,6 +469,18 @@
         createdAt: new Date().toISOString(),
         playerName: "",
         playedAt: new Date().toISOString().slice(0, 10),
+        holes: HOLES.map(distances => ({
+          distances,
+          results: [null, null, null]
+        }))
+      };
+    }
+
+    function createClearedStatePreserveMeta(currentState) {
+      return {
+        createdAt: currentState.createdAt || new Date().toISOString(),
+        playerName: currentState.playerName || "",
+        playedAt: currentState.playedAt || new Date().toISOString().slice(0, 10),
         holes: HOLES.map(distances => ({
           distances,
           results: [null, null, null]
@@ -786,8 +799,15 @@
     }
 
     document.getElementById("newRoundBtn").addEventListener("click", () => {
-      if (!confirm("Starta en ny runda?")) return;
+      if (!confirm("Starta en ny runda? Detta nollställer även namn och datum.")) return;
       state = createNewState();
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("clearRoundBtn").addEventListener("click", () => {
+      if (!confirm("Vill du rensa rundan? Namn och datum behålls.")) return;
+      state = createClearedStatePreserveMeta(state);
       saveState();
       renderAll();
     });
