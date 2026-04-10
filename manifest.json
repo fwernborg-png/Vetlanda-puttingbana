@@ -1,0 +1,10 @@
+{
+  "name": "Puttingbana",
+  "short_name": "Putting",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "description": "Puttingbana med HATTRICK, C1/C2, highscore och flera spelare.",
+  "icons": []
+}
