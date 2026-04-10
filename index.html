@@ -48,7 +48,7 @@
     }
 
     .app {
-      max-width: 920px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 18px 14px 40px;
     }
@@ -111,6 +111,23 @@
       border-color: var(--primary);
     }
 
+    .btn.danger {
+      border-color: #fca5a5;
+      color: #dc2626;
+      background: #fff;
+    }
+
+    .btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
     .tabs .btn.active {
       background: var(--primary);
       color: #fff;
@@ -132,7 +149,7 @@
     }
 
     .summary-card .value {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       line-height: 1;
       margin-bottom: 6px;
@@ -159,7 +176,8 @@
       font-size: 14px;
     }
 
-    .field input {
+    .field input,
+    .field select {
       width: 100%;
       min-height: 52px;
       border-radius: 16px;
@@ -193,6 +211,7 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
     .hole-title {
@@ -361,6 +380,124 @@
       font-weight: 800;
     }
 
+    .group-standings {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .standing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .standing-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .standing-rank {
+      width: 30px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .standing-name {
+      font-weight: 800;
+    }
+
+    .standing-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .standing-score {
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .group-hole-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .group-distance-block {
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .group-distance-title {
+      font-size: 20px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .group-player-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .group-player-row:first-of-type {
+      border-top: none;
+    }
+
+    .group-player-name {
+      font-weight: 700;
+    }
+
+    .mini-btn {
+      min-height: 46px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      border: 2px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .mini-btn.hit {
+      color: var(--green-strong);
+      border-color: #86efac;
+    }
+
+    .mini-btn.hit.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green-strong);
+    }
+
+    .mini-btn.miss {
+      color: var(--red-strong);
+      border-color: #fca5a5;
+    }
+
+    .mini-btn.miss.active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red-strong);
+    }
+
+    .mini-btn.reset {
+      color: var(--blue);
+    }
+
     .footer-note {
       color: var(--muted);
       font-size: 13px;
@@ -373,6 +510,15 @@
       .grid-3 { grid-template-columns: 1fr; }
       .field-grid { grid-template-columns: 1fr; }
       .title { font-size: 32px; }
+      .group-player-row {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .group-player-row .mini-btn.reset {
+        grid-column: 1 / -1;
+      }
+      .group-hole-nav {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -380,7 +526,7 @@
   <div class="app">
     <div class="topbar">
       <div class="title">Puttingbana</div>
-      <div class="subtitle">18 hål, 54 puttar, HATTRICK, BOM och gemensam highscore.</div>
+      <div class="subtitle">Solo eller gruppträning för 2–4 spelare, med gemensam highscore.</div>
       <div class="help">
         Öppna i <strong>Safari</strong> och välj <strong>Dela → Lägg till på hemskärmen</strong> om du vill använda den som app på iPhone.
       </div>
@@ -388,7 +534,7 @@
 
     <div class="row grid-3">
       <button class="btn primary" id="newRoundBtn">Ny runda</button>
-      <button class="btn" id="clearRoundBtn">Rensa runda</button>
+      <button class="btn danger" id="clearRoundBtn">Rensa runda</button>
       <button class="btn" id="saveHighscoreBtn">Spara till gemensam highscore</button>
     </div>
 
@@ -402,19 +548,38 @@
 
     <section class="section active" id="section-round">
       <div class="card" style="margin-bottom:16px;">
-        <div class="field-grid">
-          <div class="field">
-            <label for="playerName">Namn</label>
-            <input id="playerName" type="text" placeholder="Skriv namn">
-          </div>
+        <div class="row grid-2">
+          <button class="btn" id="modeSoloBtn">Solo</button>
+          <button class="btn" id="modeGroupBtn">Grupp</button>
+        </div>
+
+        <div class="field-grid" style="margin-top:12px;">
           <div class="field">
             <label for="playedAt">Datum</label>
             <input id="playedAt" type="date">
           </div>
+          <div class="field" id="groupCountWrap" style="display:none;">
+            <label for="groupCount">Antal spelare</label>
+            <select id="groupCount">
+              <option value="2">2 spelare</option>
+              <option value="3">3 spelare</option>
+              <option value="4">4 spelare</option>
+            </select>
+          </div>
         </div>
+
+        <div id="soloFields" style="margin-top:12px;">
+          <div class="field">
+            <label for="playerName">Namn</label>
+            <input id="playerName" type="text" placeholder="Skriv namn">
+          </div>
+        </div>
+
+        <div id="groupFields" style="display:none; margin-top:12px;"></div>
       </div>
 
-      <div id="holesContainer"></div>
+      <div id="soloRoundContainer"></div>
+      <div id="groupRoundContainer" style="display:none;"></div>
     </section>
 
     <section class="section" id="section-overview">
@@ -441,7 +606,7 @@
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_clean_v4";
+    const STORAGE_KEY = "puttingbana_group_v2";
 
     const HOLES = [
       [23, 14, 7],
@@ -464,27 +629,28 @@
       [14, 10, 6]
     ];
 
-    function createNewState() {
-      return {
-        createdAt: new Date().toISOString(),
-        playerName: "",
-        playedAt: new Date().toISOString().slice(0, 10),
-        holes: HOLES.map(distances => ({
-          distances,
-          results: [null, null, null]
-        }))
-      };
+    function makeSoloHoles() {
+      return HOLES.map(distances => ({ distances, results: [null, null, null] }));
     }
 
-    function createClearedStatePreserveMeta(currentState) {
+    function makeGroupHoles(playerCount) {
+      return HOLES.map(distances => ({
+        distances,
+        players: Array.from({ length: playerCount }, () => ({ results: [null, null, null] }))
+      }));
+    }
+
+    function createNewState() {
       return {
-        createdAt: currentState.createdAt || new Date().toISOString(),
-        playerName: currentState.playerName || "",
-        playedAt: currentState.playedAt || new Date().toISOString().slice(0, 10),
-        holes: HOLES.map(distances => ({
-          distances,
-          results: [null, null, null]
-        }))
+        mode: "solo",
+        createdAt: new Date().toISOString(),
+        playedAt: new Date().toISOString().slice(0, 10),
+        playerName: "",
+        groupCount: 2,
+        groupNames: ["", "", "", ""],
+        currentGroupHole: 0,
+        soloHoles: makeSoloHoles(),
+        groupHoles: makeGroupHoles(2)
       };
     }
 
@@ -493,11 +659,17 @@
       if (!raw) return createNewState();
       try {
         const parsed = JSON.parse(raw);
+        const playerCount = Number(parsed.groupCount || 2);
         return {
-          playerName: parsed.playerName || "",
-          playedAt: parsed.playedAt || new Date().toISOString().slice(0, 10),
+          mode: parsed.mode || "solo",
           createdAt: parsed.createdAt || new Date().toISOString(),
-          holes: Array.isArray(parsed.holes) ? parsed.holes : createNewState().holes
+          playedAt: parsed.playedAt || new Date().toISOString().slice(0, 10),
+          playerName: parsed.playerName || "",
+          groupCount: playerCount,
+          groupNames: Array.isArray(parsed.groupNames) ? [...parsed.groupNames, "", "", "", ""].slice(0, 4) : ["", "", "", ""],
+          currentGroupHole: Number.isInteger(parsed.currentGroupHole) ? parsed.currentGroupHole : 0,
+          soloHoles: Array.isArray(parsed.soloHoles) ? parsed.soloHoles : makeSoloHoles(),
+          groupHoles: Array.isArray(parsed.groupHoles) ? parsed.groupHoles : makeGroupHoles(playerCount)
         };
       } catch {
         return createNewState();
@@ -505,25 +677,53 @@
     }
 
     let state = loadState();
-    let activeTab = "round";
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    function setResult(holeIndex, puttIndex, value) {
-      state.holes[holeIndex].results[puttIndex] = value;
+    function resetAllNewRound() {
+      state = createNewState();
       saveState();
       renderAll();
     }
 
-    function resetPutt(holeIndex, puttIndex) {
-      state.holes[holeIndex].results[puttIndex] = null;
+    function clearRoundPreserveMeta() {
+      if (state.mode === "solo") {
+        state.soloHoles = makeSoloHoles();
+      } else {
+        state.groupHoles = makeGroupHoles(state.groupCount);
+        state.currentGroupHole = 0;
+      }
       saveState();
       renderAll();
     }
 
-    function getStats() {
+    function setSoloResult(holeIndex, puttIndex, value) {
+      state.soloHoles[holeIndex].results[puttIndex] = value;
+      saveState();
+      renderAll();
+    }
+
+    function resetSoloPutt(holeIndex, puttIndex) {
+      state.soloHoles[holeIndex].results[puttIndex] = null;
+      saveState();
+      renderAll();
+    }
+
+    function setGroupResult(holeIndex, playerIndex, puttIndex, value) {
+      state.groupHoles[holeIndex].players[playerIndex].results[puttIndex] = value;
+      saveState();
+      renderAll();
+    }
+
+    function resetGroupPutt(holeIndex, playerIndex, puttIndex) {
+      state.groupHoles[holeIndex].players[playerIndex].results[puttIndex] = null;
+      saveState();
+      renderAll();
+    }
+
+    function getSoloStats() {
       let totalMade = 0;
       let totalAttempts = 0;
       let c1Made = 0;
@@ -533,7 +733,7 @@
       let hattricks = 0;
       let bombs = 0;
 
-      state.holes.forEach(hole => {
+      state.soloHoles.forEach(hole => {
         const made = hole.results.filter(v => v === true).length;
         const missed = hole.results.filter(v => v === false).length;
 
@@ -571,38 +771,159 @@
       };
     }
 
-    function renderSummary() {
-      const stats = getStats();
-      const wrap = document.getElementById("summaryCards");
-      wrap.innerHTML = `
-        <div class="card summary-card">
-          <div class="label">Satta</div>
-          <div class="value">${stats.totalMade}/${stats.totalAttempts || 54}</div>
-          <div class="sub">Alla puttar</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">Träffprocent</div>
-          <div class="value">${stats.totalPercent}%</div>
-          <div class="sub">Aktiv runda</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">C1</div>
-          <div class="value">${stats.c1Made}/${stats.c1Attempts}</div>
-          <div class="sub">${stats.c1Percent}%</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">C2</div>
-          <div class="value">${stats.c2Made}/${stats.c2Attempts}</div>
-          <div class="sub">${stats.c2Percent}%</div>
-        </div>
-      `;
+    function getSinglePlayerGroupStats(playerIndex) {
+      let totalMade = 0;
+      let totalAttempts = 0;
+      let c1Made = 0;
+      let c1Attempts = 0;
+      let c2Made = 0;
+      let c2Attempts = 0;
+      let hattricks = 0;
+      let bombs = 0;
+
+      state.groupHoles.forEach(hole => {
+        const results = hole.players[playerIndex].results;
+        const made = results.filter(v => v === true).length;
+        const missed = results.filter(v => v === false).length;
+
+        if (made === 3) hattricks++;
+        if (missed === 3) bombs++;
+
+        results.forEach((res, idx) => {
+          if (res !== null) totalAttempts++;
+          if (res === true) totalMade++;
+
+          const distance = hole.distances[idx];
+          if (distance >= 5 && distance <= 10) {
+            if (res !== null) c1Attempts++;
+            if (res === true) c1Made++;
+          }
+          if (distance >= 11 && distance <= 23) {
+            if (res !== null) c2Attempts++;
+            if (res === true) c2Made++;
+          }
+        });
+      });
+
+      return {
+        totalMade,
+        totalAttempts,
+        totalPercent: totalAttempts ? Math.round((totalMade / totalAttempts) * 100) : 0,
+        c1Made,
+        c1Attempts,
+        c1Percent: c1Attempts ? Math.round((c1Made / c1Attempts) * 100) : 0,
+        c2Made,
+        c2Attempts,
+        c2Percent: c2Attempts ? Math.round((c2Made / c2Attempts) * 100) : 0,
+        hattricks,
+        bombs
+      };
     }
 
-    function renderHoles() {
-      const wrap = document.getElementById("holesContainer");
+    function getGroupStandings() {
+      return Array.from({ length: state.groupCount }, (_, index) => {
+        const stats = getSinglePlayerGroupStats(index);
+        return {
+          index,
+          name: state.groupNames[index]?.trim() || `Spelare ${index + 1}`,
+          ...stats
+        };
+      }).sort((a, b) => {
+        if (b.totalMade !== a.totalMade) return b.totalMade - a.totalMade;
+        if (b.totalPercent !== a.totalPercent) return b.totalPercent - a.totalPercent;
+        return a.index - b.index;
+      });
+    }
+
+    function getTopGroupSummary() {
+      const standings = getGroupStandings();
+      const leader = standings[0];
+      return leader
+        ? {
+            totalMade: leader.totalMade,
+            totalAttempts: leader.totalAttempts,
+            totalPercent: leader.totalPercent,
+            c1Made: leader.c1Made,
+            c1Attempts: leader.c1Attempts,
+            c1Percent: leader.c1Percent,
+            c2Made: leader.c2Made,
+            c2Attempts: leader.c2Attempts,
+            c2Percent: leader.c2Percent,
+            leaderName: leader.name
+          }
+        : {
+            totalMade: 0,
+            totalAttempts: 0,
+            totalPercent: 0,
+            c1Made: 0,
+            c1Attempts: 0,
+            c1Percent: 0,
+            c2Made: 0,
+            c2Attempts: 0,
+            c2Percent: 0,
+            leaderName: "-"
+          };
+    }
+
+    function renderSummary() {
+      const wrap = document.getElementById("summaryCards");
+
+      if (state.mode === "solo") {
+        const stats = getSoloStats();
+        wrap.innerHTML = `
+          <div class="card summary-card">
+            <div class="label">Satta</div>
+            <div class="value">${stats.totalMade}/${stats.totalAttempts || 54}</div>
+            <div class="sub">Alla puttar</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Träffprocent</div>
+            <div class="value">${stats.totalPercent}%</div>
+            <div class="sub">Aktiv runda</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">C1</div>
+            <div class="value">${stats.c1Made}/${stats.c1Attempts}</div>
+            <div class="sub">${stats.c1Percent}%</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">C2</div>
+            <div class="value">${stats.c2Made}/${stats.c2Attempts}</div>
+            <div class="sub">${stats.c2Percent}%</div>
+          </div>
+        `;
+      } else {
+        const top = getTopGroupSummary();
+        wrap.innerHTML = `
+          <div class="card summary-card">
+            <div class="label">Ledare</div>
+            <div class="value" style="font-size:22px;">${top.leaderName}</div>
+            <div class="sub">Bäst just nu</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa score</div>
+            <div class="value">${top.totalMade}</div>
+            <div class="sub">Satta puttar</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa C1</div>
+            <div class="value">${top.c1Made}/${top.c1Attempts}</div>
+            <div class="sub">${top.c1Percent}%</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa C2</div>
+            <div class="value">${top.c2Made}/${top.c2Attempts}</div>
+            <div class="sub">${top.c2Percent}%</div>
+          </div>
+        `;
+      }
+    }
+
+    function renderSoloRound() {
+      const wrap = document.getElementById("soloRoundContainer");
       wrap.innerHTML = "";
 
-      state.holes.forEach((hole, holeIndex) => {
+      state.soloHoles.forEach((hole, holeIndex) => {
         const made = hole.results.filter(v => v === true).length;
         const missed = hole.results.filter(v => v === false).length;
 
@@ -649,27 +970,148 @@
           const putt = Number(btn.dataset.putt);
           const value = btn.dataset.value;
 
-          if (value === "hit") setResult(hole, putt, true);
-          if (value === "miss") setResult(hole, putt, false);
-          if (value === "reset") resetPutt(hole, putt);
+          if (value === "hit") setSoloResult(hole, putt, true);
+          if (value === "miss") setSoloResult(hole, putt, false);
+          if (value === "reset") resetSoloPutt(hole, putt);
         });
       });
     }
 
-    function renderOverview() {
-      const stats = getStats();
-      document.getElementById("overviewCard").innerHTML = `
-        <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Översikt</div>
-        <div style="display:grid; gap:10px;">
-          <div>Satta puttar: <strong>${stats.totalMade}</strong></div>
-          <div>Försök: <strong>${stats.totalAttempts}</strong></div>
-          <div>Träffprocent: <strong>${stats.totalPercent}%</strong></div>
-          <div>C1: <strong>${stats.c1Made}/${stats.c1Attempts}</strong> (${stats.c1Percent}%)</div>
-          <div>C2: <strong>${stats.c2Made}/${stats.c2Attempts}</strong> (${stats.c2Percent}%)</div>
-          <div>HATTRICK: <strong>${stats.hattricks}</strong></div>
-          <div>BOM: <strong>${stats.bombs}</strong></div>
+    function renderGroupRound() {
+      const wrap = document.getElementById("groupRoundContainer");
+      const standings = getGroupStandings();
+      const holeIndex = state.currentGroupHole;
+      const hole = state.groupHoles[holeIndex];
+
+      wrap.innerHTML = `
+        <div class="card" style="margin-bottom:14px;">
+          <div style="font-size:22px; font-weight:800; margin-bottom:10px;">Live-ställning</div>
+          <div class="group-standings" id="groupStandings"></div>
+        </div>
+
+        <div class="group-hole-nav">
+          <button class="btn" id="prevHoleBtn" ${holeIndex === 0 ? "disabled" : ""}>← Föregående hål</button>
+          <div class="card" style="display:flex; align-items:center; justify-content:center; font-weight:800;">Hål ${holeIndex + 1} av 18</div>
+          <button class="btn" id="nextHoleBtn" ${holeIndex === 17 ? "disabled" : ""}>Nästa hål →</button>
+        </div>
+
+        <div class="card">
+          <div class="hole-header">
+            <div class="hole-title">Grupphål ${holeIndex + 1}</div>
+            <div class="badges">
+              <div class="badge">Alla spelar samma hål</div>
+            </div>
+          </div>
+          <div id="groupHoleDistances"></div>
         </div>
       `;
+
+      const standingsWrap = wrap.querySelector("#groupStandings");
+      standings.forEach((player, index) => {
+        const row = document.createElement("div");
+        row.className = "standing-row";
+        row.innerHTML = `
+          <div class="standing-left">
+            <div class="standing-rank">${index + 1}</div>
+            <div>
+              <div class="standing-name">${player.name}</div>
+              <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks}</div>
+            </div>
+          </div>
+          <div class="standing-score">${player.totalMade}</div>
+        `;
+        standingsWrap.appendChild(row);
+      });
+
+      const distancesWrap = wrap.querySelector("#groupHoleDistances");
+      hole.distances.forEach((distance, puttIndex) => {
+        const block = document.createElement("div");
+        block.className = "group-distance-block";
+        block.innerHTML = `<div class="group-distance-title">${distance} m</div>`;
+
+        Array.from({ length: state.groupCount }, (_, playerIndex) => {
+          const result = hole.players[playerIndex].results[puttIndex];
+          const playerName = state.groupNames[playerIndex]?.trim() || `Spelare ${playerIndex + 1}`;
+
+          const row = document.createElement("div");
+          row.className = "group-player-row";
+          row.innerHTML = `
+            <div class="group-player-name">${playerName}</div>
+            <button class="mini-btn hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+            <button class="mini-btn miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+            <button class="mini-btn reset" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+          `;
+          block.appendChild(row);
+        });
+
+        distancesWrap.appendChild(block);
+      });
+
+      wrap.querySelectorAll("button[data-player]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const hole = Number(btn.dataset.hole);
+          const player = Number(btn.dataset.player);
+          const putt = Number(btn.dataset.putt);
+          const value = btn.dataset.value;
+
+          if (value === "hit") setGroupResult(hole, player, putt, true);
+          if (value === "miss") setGroupResult(hole, player, putt, false);
+          if (value === "reset") resetGroupPutt(hole, player, putt);
+        });
+      });
+
+      wrap.querySelector("#prevHoleBtn").addEventListener("click", () => {
+        if (state.currentGroupHole > 0) {
+          state.currentGroupHole -= 1;
+          saveState();
+          renderAll();
+        }
+      });
+
+      wrap.querySelector("#nextHoleBtn").addEventListener("click", () => {
+        if (state.currentGroupHole < 17) {
+          state.currentGroupHole += 1;
+          saveState();
+          renderAll();
+        }
+      });
+    }
+
+    function renderOverview() {
+      if (state.mode === "solo") {
+        const stats = getSoloStats();
+        document.getElementById("overviewCard").innerHTML = `
+          <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Översikt</div>
+          <div style="display:grid; gap:10px;">
+            <div>Satta puttar: <strong>${stats.totalMade}</strong></div>
+            <div>Försök: <strong>${stats.totalAttempts}</strong></div>
+            <div>Träffprocent: <strong>${stats.totalPercent}%</strong></div>
+            <div>C1: <strong>${stats.c1Made}/${stats.c1Attempts}</strong> (${stats.c1Percent}%)</div>
+            <div>C2: <strong>${stats.c2Made}/${stats.c2Attempts}</strong> (${stats.c2Percent}%)</div>
+            <div>HATTRICK: <strong>${stats.hattricks}</strong></div>
+            <div>BOM: <strong>${stats.bombs}</strong></div>
+          </div>
+        `;
+      } else {
+        const standings = getGroupStandings();
+        document.getElementById("overviewCard").innerHTML = `
+          <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Gruppöversikt</div>
+          <div style="display:grid; gap:10px;">
+            ${standings.map((player, index) => `
+              <div class="standing-row">
+                <div class="standing-left">
+                  <div class="standing-rank">${index + 1}</div>
+                  <div>
+                    <div class="standing-name">${player.name}</div>
+                    <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks} • BOM ${player.bombs}</div>
+                  </div>
+                </div>
+                <div class="standing-score">${player.totalMade}</div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
     }
 
     function getBestPerPlayer(rows) {
@@ -750,27 +1192,47 @@
     }
 
     async function saveCurrentScoreToHighscore() {
-      const stats = getStats();
-      const score = stats.totalMade;
-      const name = (state.playerName || "").trim() || "Anonym";
-      const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
+      if (state.mode === "solo") {
+        const stats = getSoloStats();
+        const score = stats.totalMade;
+        const name = (state.playerName || "").trim() || "Anonym";
+        const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
 
-      const { error } = await db
-        .from("scores")
-        .insert([{ score, name, played_at }]);
+        const { error } = await db
+          .from("scores")
+          .insert([{ score, name, played_at }]);
 
-      if (error) {
-        alert("Fel när highscore skulle sparas: " + error.message);
+        if (error) {
+          alert("Fel när highscore skulle sparas: " + error.message);
+          return;
+        }
+
+        alert("Highscore sparad!");
+        loadLeaderboard();
         return;
       }
 
-      alert("Highscore sparad!");
+      const rows = Array.from({ length: state.groupCount }, (_, index) => {
+        const stats = getSinglePlayerGroupStats(index);
+        return {
+          score: stats.totalMade,
+          name: (state.groupNames[index] || "").trim() || `Spelare ${index + 1}`,
+          played_at: state.playedAt || new Date().toISOString().slice(0, 10)
+        };
+      });
+
+      const { error } = await db.from("scores").insert(rows);
+
+      if (error) {
+        alert("Fel när gruppresultat skulle sparas: " + error.message);
+        return;
+      }
+
+      alert("Gruppresultat sparat!");
       loadLeaderboard();
     }
 
     function activateTab(tabName) {
-      activeTab = tabName;
-
       document.querySelectorAll(".tabs .btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.tab === tabName);
       });
@@ -781,41 +1243,98 @@
 
       document.getElementById("section-" + tabName).classList.add("active");
 
-      if (tabName === "highscore") {
-        loadLeaderboard();
+      if (tabName === "highscore") loadLeaderboard();
+    }
+
+    function renderGroupFields() {
+      const wrap = document.getElementById("groupFields");
+      wrap.innerHTML = "";
+
+      for (let i = 0; i < state.groupCount; i++) {
+        const field = document.createElement("div");
+        field.className = "field";
+        field.style.marginBottom = "10px";
+        field.innerHTML = `
+          <label for="groupPlayer${i}">Spelare ${i + 1}</label>
+          <input id="groupPlayer${i}" type="text" placeholder="Skriv namn" value="${state.groupNames[i] || ""}">
+        `;
+        wrap.appendChild(field);
+      }
+
+      for (let i = 0; i < state.groupCount; i++) {
+        const input = document.getElementById(`groupPlayer${i}`);
+        input.addEventListener("input", (e) => {
+          state.groupNames[i] = e.target.value;
+          saveState();
+        });
       }
     }
 
+    function renderModeUI() {
+      document.getElementById("modeSoloBtn").classList.toggle("active", state.mode === "solo");
+      document.getElementById("modeGroupBtn").classList.toggle("active", state.mode === "group");
+
+      document.getElementById("soloFields").style.display = state.mode === "solo" ? "block" : "none";
+      document.getElementById("groupFields").style.display = state.mode === "group" ? "block" : "none";
+      document.getElementById("groupCountWrap").style.display = state.mode === "group" ? "block" : "none";
+
+      document.getElementById("soloRoundContainer").style.display = state.mode === "solo" ? "block" : "none";
+      document.getElementById("groupRoundContainer").style.display = state.mode === "group" ? "block" : "none";
+
+      document.getElementById("groupCount").value = String(state.groupCount);
+      document.getElementById("playerName").value = state.playerName || "";
+      document.getElementById("playedAt").value = state.playedAt || new Date().toISOString().slice(0, 10);
+
+      renderGroupFields();
+    }
+
     function renderAll() {
+      renderModeUI();
       renderSummary();
-      renderHoles();
       renderOverview();
 
-      const playerNameInput = document.getElementById("playerName");
-      const playedAtInput = document.getElementById("playedAt");
-
-      if (playerNameInput) playerNameInput.value = state.playerName || "";
-      if (playedAtInput) playedAtInput.value = state.playedAt || new Date().toISOString().slice(0, 10);
+      if (state.mode === "solo") {
+        renderSoloRound();
+      } else {
+        renderGroupRound();
+      }
     }
 
     document.getElementById("newRoundBtn").addEventListener("click", () => {
-      if (!confirm("Starta en ny runda? Detta nollställer även namn och datum.")) return;
-      state = createNewState();
-      saveState();
-      renderAll();
+      if (!confirm("Starta en ny runda? Detta nollställer allt.")) return;
+      resetAllNewRound();
     });
 
     document.getElementById("clearRoundBtn").addEventListener("click", () => {
       if (!confirm("Vill du rensa rundan? Namn och datum behålls.")) return;
-      state = createClearedStatePreserveMeta(state);
-      saveState();
-      renderAll();
+      clearRoundPreserveMeta();
     });
 
     document.getElementById("saveHighscoreBtn").addEventListener("click", saveCurrentScoreToHighscore);
 
     document.querySelectorAll(".tabs .btn").forEach(btn => {
       btn.addEventListener("click", () => activateTab(btn.dataset.tab));
+    });
+
+    document.getElementById("modeSoloBtn").addEventListener("click", () => {
+      state.mode = "solo";
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("modeGroupBtn").addEventListener("click", () => {
+      state.mode = "group";
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("groupCount").addEventListener("change", (e) => {
+      const count = Number(e.target.value);
+      state.groupCount = count;
+      state.groupHoles = makeGroupHoles(count);
+      state.currentGroupHole = 0;
+      saveState();
+      renderAll();
     });
 
     document.getElementById("playerName").addEventListener("input", (e) => {
