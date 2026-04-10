@@ -1,93 +1,658 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<title>Putting App</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Puttingbana</title>
 
-<style>
-body {
-  font-family: Arial;
-  background: #f5f5f5;
-  padding: 20px;
-}
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --line: #dbe3ef;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #0f172a;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --green-bg: #eefbf2;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --gold-bg: #fff8e6;
+      --gold-line: #f4cc73;
+      --danger-line: #f3a8a8;
+      --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      --radius: 22px;
+    }
 
-button {
-  padding: 10px;
-  margin: 5px;
-  font-size: 16px;
-}
+    * { box-sizing: border-box; }
 
-.green { background: #4caf50; color: white; }
-.red { background: #f44336; color: white; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-.card {
-  padding: 15px;
-  background: white;
-  margin-bottom: 10px;
-  border-radius: 10px;
-}
+    .app {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
 
-</style>
+    .topbar {
+      margin-bottom: 14px;
+    }
+
+    .title {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+
+    .help {
+      background: #eef5ff;
+      border: 1px solid #bfd7ff;
+      color: #1e3a8a;
+      border-radius: 22px;
+      padding: 14px 16px;
+      line-height: 1.35;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 20px;
+      min-height: 58px;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .tabs .btn {
+      min-height: 52px;
+    }
+
+    .tabs .btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .summary-card .label {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card .value {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .summary-card .sub {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .hole-card {
+      margin-bottom: 18px;
+      transition: 0.2s ease;
+    }
+
+    .hole-card.hattrick {
+      background: var(--gold-bg);
+      border-color: var(--gold-line);
+      box-shadow: 0 0 0 2px rgba(244, 204, 115, 0.35);
+    }
+
+    .hole-card.bom {
+      background: var(--red-bg);
+      border-color: var(--danger-line);
+      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.12);
+    }
+
+    .hole-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .hole-title {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid var(--line);
+      background: #f1f5f9;
+    }
+
+    .badge.gold {
+      background: #fff1b8;
+      border-color: #ffe08a;
+    }
+
+    .badge.red {
+      background: #ffd6d6;
+      border-color: #ffb3b3;
+      color: #991b1b;
+    }
+
+    .putt-card {
+      background: #f7fafc;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .distance {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .putt-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hit-btn,
+    .miss-btn,
+    .reset-btn {
+      min-height: 64px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-weight: 800;
+      border: 2px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .hit-btn.active {
+      background: #4caf50;
+      color: #fff;
+      border-color: #4caf50;
+      box-shadow: 0 0 0 4px rgba(76,175,80,0.12);
+    }
+
+    .miss-btn.active {
+      background: #e74c3c;
+      color: #fff;
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 4px rgba(231,76,60,0.12);
+    }
+
+    .reset-btn {
+      width: 100%;
+      min-height: 54px;
+      background: #fff;
+    }
+
+    .leaderboard-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .leaderboard-rank {
+      font-weight: 800;
+      min-width: 30px;
+    }
+
+    .leaderboard-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .leaderboard-score {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid-3 { grid-template-columns: 1fr; }
+      .title { font-size: 34px; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="app">
+    <div class="topbar">
+      <div class="title">Puttingbana</div>
+      <div class="subtitle">18 hål, 54 puttar, HATTRICK, BOM och gemensam highscore.</div>
+      <div class="help">
+        När sidan ligger online: öppna i <strong>Safari</strong> och välj <strong>Dela → Lägg till på hemskärmen</strong>.
+      </div>
+    </div>
 
-<h1>Putting</h1>
+    <div class="row grid-2">
+      <button class="btn primary" id="newRoundBtn">Ny runda</button>
+      <button class="btn" id="saveHighscoreBtn">Spara till gemensam highscore</button>
+    </div>
 
-<div id="game"></div>
+    <div class="row tabs grid-3">
+      <button class="btn active" data-tab="round">Runda</button>
+      <button class="btn" data-tab="overview">Översikt</button>
+      <button class="btn" data-tab="highscore">Highscore</button>
+    </div>
 
-<h2>Highscore</h2>
-<ul id="highscores"></ul>
+    <div class="row grid-4" id="summaryCards"></div>
 
-<script>
-const supabase = window.supabase.createClient(
-  "https://izihmzhfnhqwtmuncdfj.supabase.co",
-  "DIN_KEY_HÄR"
-);
+    <section class="section active" id="section-round">
+      <div id="holesContainer"></div>
+    </section>
 
-let score = 0;
+    <section class="section" id="section-overview">
+      <div class="card" id="overviewCard"></div>
+    </section>
 
-function addShot(hit) {
-  if(hit) score++;
+    <section class="section" id="section-highscore">
+      <div class="card">
+        <div style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Gemensam highscore</div>
+        <div style="color: var(--muted); font-size: 14px;">Bästa resultat från alla som använder appen.</div>
+        <div class="leaderboard-list" id="leaderboardList"></div>
+      </div>
+    </section>
 
-  saveScore();
-}
-
-async function saveScore() {
-  await supabase.from("scores").insert([
-    { score: score }
-  ]);
-
-  loadScores();
-}
-
-async function loadScores() {
-  let { data } = await supabase
-    .from("scores")
-    .select("*")
-    .order("score", { ascending: false })
-    .limit(10);
-
-  let list = document.getElementById("highscores");
-  list.innerHTML = "";
-
-  data.forEach(row => {
-    let li = document.createElement("li");
-    li.textContent = row.score;
-    list.appendChild(li);
-  });
-}
-
-document.getElementById("game").innerHTML = `
-  <div class="card">
-    <button class="green" onclick="addShot(true)">Träff</button>
-    <button class="red" onclick="addShot(false)">Miss</button>
+    <div class="footer-note">
+      Lokal spelstatus sparas i mobilen. Highscore sparas också online via Supabase.
+    </div>
   </div>
-`;
 
-loadScores();
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://izihmzhfnhqwtmuncdfj.supabase.co",
+      "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
+    );
 
+    const STORAGE_KEY = "puttingbana_clean_v1";
+
+    const HOLES = [
+      [23,14,7],
+      [16,10,6],
+      [20,12,8],
+      [18,11,7],
+      [22,14,9],
+      [17,10,6],
+      [21,13,8],
+      [19,12,7],
+      [24,15,9],
+      [15,9,5],
+      [20,11,7],
+      [18,10,6],
+      [22,13,8],
+      [16,11,7],
+      [21,14,8],
+      [19,11,6],
+      [23,13,8],
+      [17,10,5]
+    ];
+
+    let state = loadState();
+
+    function createNewState() {
+      return {
+        createdAt: new Date().toISOString(),
+        holes: HOLES.map(distances => ({
+          distances,
+          results: [null, null, null]
+        }))
+      };
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return createNewState();
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return createNewState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function setResult(holeIndex, puttIndex, value) {
+      state.holes[holeIndex].results[puttIndex] = value;
+      saveState();
+      renderAll();
+    }
+
+    function resetPutt(holeIndex, puttIndex) {
+      state.holes[holeIndex].results[puttIndex] = null;
+      saveState();
+      renderAll();
+    }
+
+    function getStats() {
+      let totalMade = 0;
+      let totalAttempts = 0;
+      let c1Made = 0;
+      let c1Attempts = 0;
+      let c2Made = 0;
+      let c2Attempts = 0;
+      let hattricks = 0;
+      let bombs = 0;
+
+      state.holes.forEach(hole => {
+        const [r1, r2, r3] = hole.results;
+        const holeMade = hole.results.filter(v => v === true).length;
+        const holeMiss = hole.results.filter(v => v === false).length;
+
+        if (holeMade === 3) hattricks++;
+        if (holeMiss === 3) bombs++;
+
+        hole.results.forEach((res, index) => {
+          if (res !== null) totalAttempts++;
+          if (res === true) totalMade++;
+
+          if (index < 2) {
+            if (res !== null) c1Attempts++;
+            if (res === true) c1Made++;
+          } else {
+            if (res !== null) c2Attempts++;
+            if (res === true) c2Made++;
+          }
+        });
+      });
+
+      return {
+        totalMade,
+        totalAttempts,
+        totalPercent: totalAttempts ? Math.round((totalMade / totalAttempts) * 100) : 0,
+        c1Made,
+        c1Attempts,
+        c1Percent: c1Attempts ? Math.round((c1Made / c1Attempts) * 100) : 0,
+        c2Made,
+        c2Attempts,
+        c2Percent: c2Attempts ? Math.round((c2Made / c2Attempts) * 100) : 0,
+        hattricks,
+        bombs
+      };
+    }
+
+    function renderSummary() {
+      const stats = getStats();
+      const wrap = document.getElementById("summaryCards");
+      wrap.innerHTML = `
+        <div class="card summary-card">
+          <div class="label">Satta</div>
+          <div class="value">${stats.totalMade}/${stats.totalAttempts || 54}</div>
+          <div class="sub">Alla puttar</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Träffprocent</div>
+          <div class="value">${stats.totalPercent}%</div>
+          <div class="sub">Aktiv runda</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">C1</div>
+          <div class="value">${stats.c1Made}/${stats.c1Attempts}</div>
+          <div class="sub">${stats.c1Percent}%</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">C2</div>
+          <div class="value">${stats.c2Made}/${stats.c2Attempts}</div>
+          <div class="sub">${stats.c2Percent}%</div>
+        </div>
+      `;
+    }
+
+    function renderHoles() {
+      const wrap = document.getElementById("holesContainer");
+      wrap.innerHTML = "";
+
+      state.holes.forEach((hole, holeIndex) => {
+        const made = hole.results.filter(v => v === true).length;
+        const missed = hole.results.filter(v => v === false).length;
+        const holeCard = document.createElement("div");
+        holeCard.className = "card hole-card" +
+          (made === 3 ? " hattrick" : "") +
+          (missed === 3 ? " bom" : "");
+
+        const badgeHtml = `
+          <div class="badges">
+            <div class="badge">${made}/3</div>
+            ${made === 3 ? `<div class="badge gold">🏆 HATTRICK</div>` : ""}
+            ${missed === 3 ? `<div class="badge red">💥 BOM</div>` : ""}
+          </div>
+        `;
+
+        holeCard.innerHTML = `
+          <div class="hole-header">
+            <div class="hole-title">Hål ${holeIndex + 1}</div>
+            ${badgeHtml}
+          </div>
+        `;
+
+        hole.distances.forEach((distance, puttIndex) => {
+          const result = hole.results[puttIndex];
+          const puttCard = document.createElement("div");
+          puttCard.className = "putt-card";
+          puttCard.innerHTML = `
+            <div class="distance">${distance} m</div>
+            <div class="putt-actions">
+              <button class="hit-btn ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+              <button class="miss-btn ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+            </div>
+            <button class="reset-btn" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+          `;
+          holeCard.appendChild(puttCard);
+        });
+
+        wrap.appendChild(holeCard);
+      });
+
+      wrap.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const hole = Number(btn.dataset.hole);
+          const putt = Number(btn.dataset.putt);
+          const value = btn.dataset.value;
+
+          if (value === "hit") setResult(hole, putt, true);
+          if (value === "miss") setResult(hole, putt, false);
+          if (value === "reset") resetPutt(hole, putt);
+        });
+      });
+    }
+
+    function renderOverview() {
+      const stats = getStats();
+      const wrap = document.getElementById("overviewCard");
+      wrap.innerHTML = `
+        <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Översikt</div>
+        <div style="display:grid; gap:10px;">
+          <div>Satta puttar: <strong>${stats.totalMade}</strong></div>
+          <div>Försök: <strong>${stats.totalAttempts}</strong></div>
+          <div>Träffprocent: <strong>${stats.totalPercent}%</strong></div>
+          <div>C1: <strong>${stats.c1Made}/${stats.c1Attempts}</strong> (${stats.c1Percent}%)</div>
+          <div>C2: <strong>${stats.c2Made}/${stats.c2Attempts}</strong> (${stats.c2Percent}%)</div>
+          <div>HATTRICK: <strong>${stats.hattricks}</strong></div>
+          <div>BOM: <strong>${stats.bombs}</strong></div>
+        </div>
+      `;
+    }
+
+    async function loadLeaderboard() {
+      const list = document.getElementById("leaderboardList");
+      list.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
+
+      const { data, error } = await supabase
+        .from("scores")
+        .select("id, score, created_at")
+        .order("score", { ascending: false })
+        .order("created_at", { ascending: true })
+        .limit(20);
+
+      if (error) {
+        list.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda highscore: ${error.message}</div>`;
+        return;
+      }
+
+      if (!data || !data.length) {
+        list.innerHTML = `<div style="color: var(--muted);">Ingen highscore sparad ännu.</div>`;
+        return;
+      }
+
+      list.innerHTML = "";
+      data.forEach((row, index) => {
+        const date = new Date(row.created_at).toLocaleString("sv-SE");
+        const item = document.createElement("div");
+        item.className = "leaderboard-row";
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="leaderboard-rank">#${index + 1}</div>
+            <div>
+              <div style="font-weight:800;">Resultat</div>
+              <div class="leaderboard-meta">${date}</div>
+            </div>
+          </div>
+          <div class="leaderboard-score">${row.score}</div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    async function saveCurrentScoreToHighscore() {
+      const stats = getStats();
+      const score = stats.totalMade;
+
+      const { error } = await supabase
+        .from("scores")
+        .insert([{ score }]);
+
+      if (error) {
+        alert("Fel när highscore skulle sparas: " + error.message);
+        return;
+      }
+
+      alert("Highscore sparad!");
+      loadLeaderboard();
+    }
+
+    function activateTab(tabName) {
+      document.querySelectorAll(".tabs .btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tabName);
+      });
+
+      document.querySelectorAll(".section").forEach(section => {
+        section.classList.remove("active");
+      });
+
+      document.getElementById("section-" + tabName).classList.add("active");
+
+      if (tabName === "highscore") loadLeaderboard();
+    }
+
+    function renderAll() {
+      renderSummary();
+      renderHoles();
+      renderOverview();
+    }
+
+    document.getElementById("newRoundBtn").addEventListener("click", () => {
+      if (!confirm("Starta en ny runda?")) return;
+      state = createNewState();
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("saveHighscoreBtn").addEventListener("click", saveCurrentScoreToHighscore);
+
+    document.querySelectorAll(".tabs .btn").forEach(btn => {
+      btn.addEventListener("click", () => activateTab(btn.dataset.tab));
+    });
+
+    renderAll();
+    loadLeaderboard();
+  </script>
 </body>
 </html>
