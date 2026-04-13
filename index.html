@@ -14,25 +14,19 @@
       --text: #0f172a;
       --muted: #64748b;
       --primary: #0f172a;
-
       --green: #22c55e;
       --green-strong: #16a34a;
       --green-soft: #dcfce7;
-
       --red: #ef4444;
       --red-strong: #dc2626;
       --red-soft: #fee2e2;
-
       --yellow: #facc15;
       --yellow-strong: #eab308;
       --yellow-soft: #fef3c7;
-
       --blue: #2563eb;
-
       --gold: #f59e0b;
       --silver: #94a3b8;
       --bronze: #b45309;
-
       --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
       --radius: 22px;
     }
@@ -47,27 +41,14 @@
     }
 
     .app {
-      max-width: 1080px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 18px 14px 40px;
     }
 
     .topbar { margin-bottom: 14px; }
-
-    .title {
-      font-size: 38px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.35;
-      margin-bottom: 14px;
-    }
-
+    .title { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+    .subtitle { color: var(--muted); font-size: 16px; line-height: 1.35; margin-bottom: 14px; }
     .help {
       background: #eef5ff;
       border: 1px solid #bfd7ff;
@@ -79,12 +60,7 @@
       margin-bottom: 14px;
     }
 
-    .row {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
+    .row { display: grid; gap: 12px; margin-bottom: 12px; }
     .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
     .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
@@ -102,34 +78,10 @@
       box-shadow: var(--shadow);
     }
 
-    .btn.primary {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    .btn.danger {
-      border-color: #fca5a5;
-      color: #dc2626;
-      background: #fff;
-    }
-
-    .btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    .btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .tabs .btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
+    .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn.danger { border-color: #fca5a5; color: #dc2626; background: #fff; }
+    .btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
     .card {
       background: var(--card);
@@ -139,23 +91,9 @@
       padding: 16px;
     }
 
-    .summary-card .label {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .summary-card .value {
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .summary-card .sub {
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .summary-card .label { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+    .summary-card .value { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .summary-card .sub { color: var(--muted); font-size: 13px; }
 
     .section { display: none; }
     .section.active { display: block; }
@@ -185,17 +123,12 @@
       color: var(--text);
     }
 
-    .hole-card {
-      margin-bottom: 18px;
-      transition: 0.2s ease;
-    }
-
+    .hole-card { margin-bottom: 18px; transition: 0.2s ease; }
     .hole-card.hattrick {
       background: var(--yellow-soft);
       border: 3px solid var(--yellow-strong);
       box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.45);
     }
-
     .hole-card.bom {
       background: var(--red-soft);
       border: 3px solid var(--red-strong);
@@ -211,10 +144,7 @@
       flex-wrap: wrap;
     }
 
-    .hole-title {
-      font-size: 26px;
-      font-weight: 800;
-    }
+    .hole-title { font-size: 26px; font-weight: 800; }
 
     .badges {
       display: flex;
@@ -232,17 +162,8 @@
       background: #f1f5f9;
     }
 
-    .badge.hattrick {
-      background: #fff1b8;
-      border-color: #eab308;
-      color: #854d0e;
-    }
-
-    .badge.bom {
-      background: #ffd6d6;
-      border-color: #dc2626;
-      color: #991b1b;
-    }
+    .badge.hattrick { background: #fff1b8; border-color: #eab308; color: #854d0e; }
+    .badge.bom { background: #ffd6d6; border-color: #dc2626; color: #991b1b; }
 
     .putt-card {
       background: #f8fafc;
@@ -252,22 +173,10 @@
       margin-bottom: 12px;
     }
 
-    .putt-card.hit {
-      background: var(--green-soft);
-      border-color: #86efac;
-    }
+    .putt-card.hit { background: var(--green-soft); border-color: #86efac; }
+    .putt-card.miss { background: var(--red-soft); border-color: #fca5a5; }
 
-    .putt-card.miss {
-      background: var(--red-soft);
-      border-color: #fca5a5;
-    }
-
-    .distance {
-      text-align: center;
-      font-size: 21px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
+    .distance { text-align: center; font-size: 21px; font-weight: 800; margin-bottom: 12px; }
 
     .putt-actions {
       display: grid;
@@ -276,9 +185,7 @@
       margin-bottom: 10px;
     }
 
-    .btn-hit,
-    .btn-miss,
-    .btn-reset {
+    .btn-hit, .btn-miss, .btn-reset {
       min-height: 60px;
       border-radius: 18px;
       font-size: 17px;
@@ -288,12 +195,7 @@
       cursor: pointer;
     }
 
-    .btn-hit {
-      background: #ffffff;
-      color: var(--green-strong);
-      border-color: #86efac;
-    }
-
+    .btn-hit { color: var(--green-strong); border-color: #86efac; }
     .btn-hit.active {
       background: var(--green);
       color: white;
@@ -301,12 +203,7 @@
       box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
     }
 
-    .btn-miss {
-      background: #ffffff;
-      color: var(--red-strong);
-      border-color: #fca5a5;
-    }
-
+    .btn-miss { color: var(--red-strong); border-color: #fca5a5; }
     .btn-miss.active {
       background: var(--red);
       color: white;
@@ -317,18 +214,13 @@
     .btn-reset {
       width: 100%;
       min-height: 50px;
-      background: #fff;
       color: var(--blue);
       border: 2px solid var(--line);
     }
 
-    .leaderboard-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
+    .leaderboard-list { display: grid; gap: 12px; margin-top: 12px; }
 
-    .leaderboard-row {
+    .leaderboard-row, .standing-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -357,42 +249,14 @@
       box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
     }
 
-    .leaderboard-rank {
-      font-weight: 800;
-      min-width: 34px;
-      font-size: 18px;
-    }
-
+    .leaderboard-rank { font-weight: 800; min-width: 34px; font-size: 18px; }
     .leaderboard-rank.gold { color: var(--gold); }
     .leaderboard-rank.silver { color: var(--silver); }
     .leaderboard-rank.bronze { color: var(--bronze); }
 
-    .leaderboard-meta {
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .leaderboard-meta, .standing-meta { color: var(--muted); font-size: 13px; }
 
-    .leaderboard-score {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .group-standings {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .standing-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-    }
+    .leaderboard-score, .standing-score { font-size: 24px; font-weight: 800; }
 
     .standing-left {
       display: flex;
@@ -400,25 +264,10 @@
       gap: 10px;
     }
 
-    .standing-rank {
-      width: 30px;
-      font-weight: 800;
-      text-align: center;
-    }
+    .standing-rank { width: 30px; font-weight: 800; text-align: center; }
+    .standing-name { font-weight: 800; }
 
-    .standing-name {
-      font-weight: 800;
-    }
-
-    .standing-meta {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .standing-score {
-      font-weight: 800;
-      font-size: 22px;
-    }
+    .group-standings { display: grid; gap: 10px; margin-bottom: 14px; }
 
     .group-hole-nav {
       display: grid;
@@ -451,13 +300,8 @@
       border-top: 1px solid #e5e7eb;
     }
 
-    .group-player-row:first-of-type {
-      border-top: none;
-    }
-
-    .group-player-name {
-      font-weight: 700;
-    }
+    .group-player-row:first-of-type { border-top: none; }
+    .group-player-name { font-weight: 700; }
 
     .mini-btn {
       min-height: 46px;
@@ -469,78 +313,11 @@
       cursor: pointer;
     }
 
-    .mini-btn.hit {
-      color: var(--green-strong);
-      border-color: #86efac;
-    }
-
-    .mini-btn.hit.active {
-      background: var(--green);
-      color: #fff;
-      border-color: var(--green-strong);
-    }
-
-    .mini-btn.miss {
-      color: var(--red-strong);
-      border-color: #fca5a5;
-    }
-
-    .mini-btn.miss.active {
-      background: var(--red);
-      color: #fff;
-      border-color: var(--red-strong);
-    }
-
-    .mini-btn.reset {
-      color: var(--blue);
-    }
-
-    .stats-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 12px;
-    }
-
-    .stats-box {
-      border: 2px solid var(--line);
-      border-radius: 18px;
-      background: #fff;
-      padding: 14px;
-    }
-
-    .stats-box .label {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .stats-box .value {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .round-history {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .history-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-    }
-
-    .history-meta {
-      color: var(--muted);
-      font-size: 12px;
-    }
+    .mini-btn.hit { color: var(--green-strong); border-color: #86efac; }
+    .mini-btn.hit.active { background: var(--green); color: #fff; border-color: var(--green-strong); }
+    .mini-btn.miss { color: var(--red-strong); border-color: #fca5a5; }
+    .mini-btn.miss.active { background: var(--red); color: #fff; border-color: var(--red-strong); }
+    .mini-btn.reset { color: var(--blue); }
 
     .footer-note {
       color: var(--muted);
@@ -554,18 +331,9 @@
       .grid-3 { grid-template-columns: 1fr; }
       .field-grid { grid-template-columns: 1fr; }
       .title { font-size: 32px; }
-      .group-player-row {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-      .group-player-row .mini-btn.reset {
-        grid-column: 1 / -1;
-      }
-      .group-hole-nav {
-        grid-template-columns: 1fr;
-      }
-      .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .group-player-row { grid-template-columns: 1fr 1fr 1fr; }
+      .group-player-row .mini-btn.reset { grid-column: 1 / -1; }
+      .group-hole-nav { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -573,23 +341,24 @@
   <div class="app">
     <div class="topbar">
       <div class="title">Puttingbana</div>
-      <div class="subtitle">Solo eller gruppträning för 2–4 spelare, med gemensam highscore och egen statistik.</div>
+      <div class="subtitle">Solo eller gruppträning för 2–4 spelare, med gemensam highscore och privat statistik.</div>
       <div class="help">
         Öppna i <strong>Safari</strong> och välj <strong>Dela → Lägg till på hemskärmen</strong> om du vill använda den som app på iPhone.
       </div>
     </div>
 
-    <div class="row grid-3">
+    <div class="row grid-4">
       <button class="btn primary" id="newRoundBtn">Ny runda</button>
       <button class="btn danger" id="clearRoundBtn">Rensa runda</button>
-      <button class="btn" id="saveHighscoreBtn">Spara runda</button>
+      <button class="btn" id="saveHighscoreBtn">Spara highscore</button>
+      <button class="btn" id="saveHistoryBtn">Spara min statistik</button>
     </div>
 
     <div class="row tabs grid-4">
       <button class="btn active" data-tab="round">Runda</button>
       <button class="btn" data-tab="overview">Översikt</button>
       <button class="btn" data-tab="highscore">Highscore</button>
-      <button class="btn" data-tab="mystats">Min statistik</button>
+      <button class="btn" data-tab="stats">Min statistik</button>
     </div>
 
     <div class="row grid-4" id="summaryCards"></div>
@@ -637,28 +406,24 @@
     <section class="section" id="section-highscore">
       <div class="card">
         <div style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Gemensam highscore</div>
-        <div style="color: var(--muted); font-size: 14px;">Topp 10, bästa resultat per spelare.</div>
+        <div style="color: var(--muted); font-size: 14px;">Bästa resultat per spelare.</div>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </section>
 
-    <section class="section" id="section-mystats">
+    <section class="section" id="section-stats">
       <div class="card">
-        <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Min statistik</div>
-        <div class="field">
-          <label for="statsPlayerSelect">Välj spelare</label>
-          <select id="statsPlayerSelect"></select>
+        <div style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Min statistik</div>
+        <div style="color: var(--muted); font-size: 14px; margin-bottom: 14px;">
+          Den här statistiken är privat och kopplad till din enhet/inloggning.
         </div>
-
-        <div class="stats-grid" id="statsGrid"></div>
-
-        <div style="font-size:20px; font-weight:800; margin-top:18px;">Senaste rundor</div>
-        <div class="round-history" id="roundHistory"></div>
+        <div id="statsSummaryCards" class="row grid-4"></div>
+        <div id="statsHistoryList"></div>
       </div>
     </section>
 
     <div class="footer-note">
-      Alla rundor kan sparas och användas för personlig statistik. Highscore visar topp 10.
+      Lokal spelstatus sparas i mobilen. Highscore är gemensam. Min statistik är privat.
     </div>
   </div>
 
@@ -669,7 +434,9 @@
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_group_stats_v1";
+    const STORAGE_KEY = "puttingbana_group_v3";
+    let leaderboardCache = null;
+    let saveTimer = null;
 
     const HOLES = [
       [23, 14, 7],
@@ -681,9 +448,9 @@
       [13, 10, 6],
       [12, 8, 7],
       [11, 8, 6],
-      [11, 7, 5],
+      [11, 8, 5],
       [10, 7, 5],
-      [15, 9, 6],
+      [15, 8, 6],
       [13, 9, 6],
       [12, 5, 7],
       [12, 9, 6],
@@ -691,6 +458,24 @@
       [12, 9, 6],
       [14, 10, 6]
     ];
+
+    const dom = {
+      summaryCards: document.getElementById("summaryCards"),
+      overviewCard: document.getElementById("overviewCard"),
+      leaderboardList: document.getElementById("leaderboardList"),
+      soloRoundContainer: document.getElementById("soloRoundContainer"),
+      groupRoundContainer: document.getElementById("groupRoundContainer"),
+      groupFields: document.getElementById("groupFields"),
+      groupCount: document.getElementById("groupCount"),
+      playerName: document.getElementById("playerName"),
+      playedAt: document.getElementById("playedAt"),
+      groupCountWrap: document.getElementById("groupCountWrap"),
+      soloFields: document.getElementById("soloFields"),
+      modeSoloBtn: document.getElementById("modeSoloBtn"),
+      modeGroupBtn: document.getElementById("modeGroupBtn"),
+      statsSummaryCards: document.getElementById("statsSummaryCards"),
+      statsHistoryList: document.getElementById("statsHistoryList")
+    };
 
     function makeSoloHoles() {
       return HOLES.map(distances => ({ distances, results: [null, null, null] }));
@@ -720,16 +505,20 @@
     function loadState() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return createNewState();
+
       try {
         const parsed = JSON.parse(raw);
         const playerCount = Number(parsed.groupCount || 2);
+
         return {
           mode: parsed.mode || "solo",
           createdAt: parsed.createdAt || new Date().toISOString(),
           playedAt: parsed.playedAt || new Date().toISOString().slice(0, 10),
           playerName: parsed.playerName || "",
           groupCount: playerCount,
-          groupNames: Array.isArray(parsed.groupNames) ? [...parsed.groupNames, "", "", "", ""].slice(0, 4) : ["", "", "", ""],
+          groupNames: Array.isArray(parsed.groupNames)
+            ? [...parsed.groupNames, "", "", "", ""].slice(0, 4)
+            : ["", "", "", ""],
           currentGroupHole: Number.isInteger(parsed.currentGroupHole) ? parsed.currentGroupHole : 0,
           soloHoles: Array.isArray(parsed.soloHoles) ? parsed.soloHoles : makeSoloHoles(),
           groupHoles: Array.isArray(parsed.groupHoles) ? parsed.groupHoles : makeGroupHoles(playerCount)
@@ -740,10 +529,26 @@
     }
 
     let state = loadState();
-    let allSavedRounds = [];
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function saveStateDebounced(delay = 250) {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveState, delay);
+    }
+
+    async function ensureSignedIn() {
+      const { data: { session } } = await db.auth.getSession();
+      if (session?.user) return session.user;
+
+      const { data, error } = await db.auth.signInAnonymously();
+      if (error) {
+        alert("Kunde inte skapa privat användare: " + error.message);
+        throw error;
+      }
+      return data.user;
     }
 
     function resetAllNewRound() {
@@ -766,46 +571,40 @@
     function setSoloResult(holeIndex, puttIndex, value) {
       state.soloHoles[holeIndex].results[puttIndex] = value;
       saveState();
-      renderAll();
+      renderAfterScoreChange();
     }
 
     function resetSoloPutt(holeIndex, puttIndex) {
       state.soloHoles[holeIndex].results[puttIndex] = null;
       saveState();
-      renderAll();
+      renderAfterScoreChange();
     }
 
     function setGroupResult(holeIndex, playerIndex, puttIndex, value) {
       state.groupHoles[holeIndex].players[playerIndex].results[puttIndex] = value;
       saveState();
-      renderAll();
+      renderAfterScoreChange();
     }
 
     function resetGroupPutt(holeIndex, playerIndex, puttIndex) {
       state.groupHoles[holeIndex].players[playerIndex].results[puttIndex] = null;
       saveState();
-      renderAll();
+      renderAfterScoreChange();
     }
 
-    function getStatsFromHoleSet(holes, mode = "solo", playerIndex = null) {
-      let totalMade = 0;
-      let totalAttempts = 0;
-      let c1Made = 0;
-      let c1Attempts = 0;
-      let c2Made = 0;
-      let c2Attempts = 0;
-      let hattricks = 0;
-      let bombs = 0;
+    function getSoloStats() {
+      let totalMade = 0, totalAttempts = 0;
+      let c1Made = 0, c1Attempts = 0;
+      let c2Made = 0, c2Attempts = 0;
+      let hattricks = 0, bombs = 0;
 
-      holes.forEach(hole => {
-        const results = mode === "solo" ? hole.results : hole.players[playerIndex].results;
-        const made = results.filter(v => v === true).length;
-        const missed = results.filter(v => v === false).length;
-
+      state.soloHoles.forEach(hole => {
+        const made = hole.results.filter(v => v === true).length;
+        const missed = hole.results.filter(v => v === false).length;
         if (made === 3) hattricks++;
         if (missed === 3) bombs++;
 
-        results.forEach((res, index) => {
+        hole.results.forEach((res, index) => {
           if (res !== null) totalAttempts++;
           if (res === true) totalMade++;
 
@@ -836,12 +635,51 @@
       };
     }
 
-    function getSoloStats() {
-      return getStatsFromHoleSet(state.soloHoles, "solo");
-    }
-
     function getSinglePlayerGroupStats(playerIndex) {
-      return getStatsFromHoleSet(state.groupHoles, "group", playerIndex);
+      let totalMade = 0, totalAttempts = 0;
+      let c1Made = 0, c1Attempts = 0;
+      let c2Made = 0, c2Attempts = 0;
+      let hattricks = 0, bombs = 0;
+
+      state.groupHoles.forEach(hole => {
+        const player = hole.players[playerIndex];
+        if (!player) return;
+
+        const results = player.results;
+        const made = results.filter(v => v === true).length;
+        const missed = results.filter(v => v === false).length;
+        if (made === 3) hattricks++;
+        if (missed === 3) bombs++;
+
+        results.forEach((res, idx) => {
+          if (res !== null) totalAttempts++;
+          if (res === true) totalMade++;
+
+          const distance = hole.distances[idx];
+          if (distance >= 5 && distance <= 10) {
+            if (res !== null) c1Attempts++;
+            if (res === true) c1Made++;
+          }
+          if (distance >= 11 && distance <= 23) {
+            if (res !== null) c2Attempts++;
+            if (res === true) c2Made++;
+          }
+        });
+      });
+
+      return {
+        totalMade,
+        totalAttempts,
+        totalPercent: totalAttempts ? Math.round((totalMade / totalAttempts) * 100) : 0,
+        c1Made,
+        c1Attempts,
+        c1Percent: c1Attempts ? Math.round((c1Made / c1Attempts) * 100) : 0,
+        c2Made,
+        c2Attempts,
+        c2Percent: c2Attempts ? Math.round((c2Made / c2Attempts) * 100) : 0,
+        hattricks,
+        bombs
+      };
     }
 
     function getGroupStandings() {
@@ -862,39 +700,36 @@
     function getTopGroupSummary() {
       const standings = getGroupStandings();
       const leader = standings[0];
-      return leader
-        ? {
-            totalMade: leader.totalMade,
-            totalAttempts: leader.totalAttempts,
-            totalPercent: leader.totalPercent,
-            c1Made: leader.c1Made,
-            c1Attempts: leader.c1Attempts,
-            c1Percent: leader.c1Percent,
-            c2Made: leader.c2Made,
-            c2Attempts: leader.c2Attempts,
-            c2Percent: leader.c2Percent,
-            leaderName: leader.name
-          }
-        : {
-            totalMade: 0,
-            totalAttempts: 0,
-            totalPercent: 0,
-            c1Made: 0,
-            c1Attempts: 0,
-            c1Percent: 0,
-            c2Made: 0,
-            c2Attempts: 0,
-            c2Percent: 0,
-            leaderName: "-"
-          };
+
+      return leader ? {
+        totalMade: leader.totalMade,
+        totalAttempts: leader.totalAttempts,
+        totalPercent: leader.totalPercent,
+        c1Made: leader.c1Made,
+        c1Attempts: leader.c1Attempts,
+        c1Percent: leader.c1Percent,
+        c2Made: leader.c2Made,
+        c2Attempts: leader.c2Attempts,
+        c2Percent: leader.c2Percent,
+        leaderName: leader.name
+      } : {
+        totalMade: 0,
+        totalAttempts: 0,
+        totalPercent: 0,
+        c1Made: 0,
+        c1Attempts: 0,
+        c1Percent: 0,
+        c2Made: 0,
+        c2Attempts: 0,
+        c2Percent: 0,
+        leaderName: "-"
+      };
     }
 
     function renderSummary() {
-      const wrap = document.getElementById("summaryCards");
-
       if (state.mode === "solo") {
         const stats = getSoloStats();
-        wrap.innerHTML = `
+        dom.summaryCards.innerHTML = `
           <div class="card summary-card">
             <div class="label">Satta</div>
             <div class="value">${stats.totalMade}/${stats.totalAttempts || 54}</div>
@@ -916,101 +751,89 @@
             <div class="sub">${stats.c2Percent}%</div>
           </div>
         `;
-      } else {
-        const top = getTopGroupSummary();
-        wrap.innerHTML = `
-          <div class="card summary-card">
-            <div class="label">Ledare</div>
-            <div class="value" style="font-size:22px;">${top.leaderName}</div>
-            <div class="sub">Bäst just nu</div>
-          </div>
-          <div class="card summary-card">
-            <div class="label">Bästa score</div>
-            <div class="value">${top.totalMade}</div>
-            <div class="sub">Satta puttar</div>
-          </div>
-          <div class="card summary-card">
-            <div class="label">Bästa C1</div>
-            <div class="value">${top.c1Made}/${top.c1Attempts}</div>
-            <div class="sub">${top.c1Percent}%</div>
-          </div>
-          <div class="card summary-card">
-            <div class="label">Bästa C2</div>
-            <div class="value">${top.c2Made}/${top.c2Attempts}</div>
-            <div class="sub">${top.c2Percent}%</div>
-          </div>
-        `;
+        return;
       }
+
+      const top = getTopGroupSummary();
+      dom.summaryCards.innerHTML = `
+        <div class="card summary-card">
+          <div class="label">Ledare</div>
+          <div class="value" style="font-size:22px;">${top.leaderName}</div>
+          <div class="sub">Bäst just nu</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Bästa score</div>
+          <div class="value">${top.totalMade}</div>
+          <div class="sub">Satta puttar</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Bästa C1</div>
+          <div class="value">${top.c1Made}/${top.c1Attempts}</div>
+          <div class="sub">${top.c1Percent}%</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Bästa C2</div>
+          <div class="value">${top.c2Made}/${top.c2Attempts}</div>
+          <div class="sub">${top.c2Percent}%</div>
+        </div>
+      `;
     }
 
     function renderSoloRound() {
-      const wrap = document.getElementById("soloRoundContainer");
-      wrap.innerHTML = "";
-
-      state.soloHoles.forEach((hole, holeIndex) => {
+      dom.soloRoundContainer.innerHTML = state.soloHoles.map((hole, holeIndex) => {
         const made = hole.results.filter(v => v === true).length;
         const missed = hole.results.filter(v => v === false).length;
 
-        const holeCard = document.createElement("div");
-        holeCard.className = "card hole-card" +
-          (made === 3 ? " hattrick" : "") +
-          (missed === 3 ? " bom" : "");
-
-        holeCard.innerHTML = `
-          <div class="hole-header">
-            <div class="hole-title">Hål ${holeIndex + 1}</div>
-            <div class="badges">
-              <div class="badge">${made}/3</div>
-              ${made === 3 ? `<div class="badge hattrick">🏆 HATTRICK</div>` : ""}
-              ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
+        return `
+          <div class="card hole-card${made === 3 ? " hattrick" : ""}${missed === 3 ? " bom" : ""}">
+            <div class="hole-header">
+              <div class="hole-title">Hål ${holeIndex + 1}</div>
+              <div class="badges">
+                <div class="badge">${made}/3</div>
+                ${made === 3 ? `<div class="badge hattrick">🏆 HATTRICK</div>` : ""}
+                ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
+              </div>
             </div>
+            ${hole.distances.map((distance, puttIndex) => {
+              const result = hole.results[puttIndex];
+              return `
+                <div class="putt-card${result === true ? " hit" : ""}${result === false ? " miss" : ""}">
+                  <div class="distance">${distance} m</div>
+                  <div class="putt-actions">
+                    <button class="btn-hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+                    <button class="btn-miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+                  </div>
+                  <button class="btn-reset" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+                </div>
+              `;
+            }).join("")}
           </div>
         `;
-
-        hole.distances.forEach((distance, puttIndex) => {
-          const result = hole.results[puttIndex];
-          const puttCard = document.createElement("div");
-          puttCard.className = "putt-card" +
-            (result === true ? " hit" : "") +
-            (result === false ? " miss" : "");
-
-          puttCard.innerHTML = `
-            <div class="distance">${distance} m</div>
-            <div class="putt-actions">
-              <button class="btn-hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
-              <button class="btn-miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
-            </div>
-            <button class="btn-reset" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
-          `;
-          holeCard.appendChild(puttCard);
-        });
-
-        wrap.appendChild(holeCard);
-      });
-
-      wrap.querySelectorAll("button[data-hole]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const hole = Number(btn.dataset.hole);
-          const putt = Number(btn.dataset.putt);
-          const value = btn.dataset.value;
-
-          if (value === "hit") setSoloResult(hole, putt, true);
-          if (value === "miss") setSoloResult(hole, putt, false);
-          if (value === "reset") resetSoloPutt(hole, putt);
-        });
-      });
+      }).join("");
     }
 
     function renderGroupRound() {
-      const wrap = document.getElementById("groupRoundContainer");
       const standings = getGroupStandings();
       const holeIndex = state.currentGroupHole;
       const hole = state.groupHoles[holeIndex];
 
-      wrap.innerHTML = `
+      dom.groupRoundContainer.innerHTML = `
         <div class="card" style="margin-bottom:14px;">
           <div style="font-size:22px; font-weight:800; margin-bottom:10px;">Live-ställning</div>
-          <div class="group-standings" id="groupStandings"></div>
+          <div class="group-standings">
+            ${standings.map((player, index) => `
+              <div class="standing-row">
+                <div class="standing-left">
+                  <div class="standing-rank">${index + 1}</div>
+                  <div>
+                    <div class="standing-name">${player.name}</div>
+                    <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks}</div>
+                  </div>
+                </div>
+                <div class="standing-score">${player.totalMade}</div>
+              </div>
+            `).join("")}
+          </div>
         </div>
 
         <div class="group-hole-nav">
@@ -1022,89 +845,34 @@
         <div class="card">
           <div class="hole-header">
             <div class="hole-title">Grupphål ${holeIndex + 1}</div>
-            <div class="badges">
-              <div class="badge">Alla spelar samma hål</div>
-            </div>
+            <div class="badges"><div class="badge">Alla spelar samma hål</div></div>
           </div>
-          <div id="groupHoleDistances"></div>
+
+          ${hole.distances.map((distance, puttIndex) => `
+            <div class="group-distance-block">
+              <div class="group-distance-title">${distance} m</div>
+              ${Array.from({ length: state.groupCount }, (_, playerIndex) => {
+                const result = hole.players[playerIndex].results[puttIndex];
+                const playerName = state.groupNames[playerIndex]?.trim() || `Spelare ${playerIndex + 1}`;
+                return `
+                  <div class="group-player-row">
+                    <div class="group-player-name">${playerName}</div>
+                    <button class="mini-btn hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+                    <button class="mini-btn miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+                    <button class="mini-btn reset" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          `).join("")}
         </div>
       `;
-
-      const standingsWrap = wrap.querySelector("#groupStandings");
-      standings.forEach((player, index) => {
-        const row = document.createElement("div");
-        row.className = "standing-row";
-        row.innerHTML = `
-          <div class="standing-left">
-            <div class="standing-rank">${index + 1}</div>
-            <div>
-              <div class="standing-name">${player.name}</div>
-              <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks}</div>
-            </div>
-          </div>
-          <div class="standing-score">${player.totalMade}</div>
-        `;
-        standingsWrap.appendChild(row);
-      });
-
-      const distancesWrap = wrap.querySelector("#groupHoleDistances");
-      hole.distances.forEach((distance, puttIndex) => {
-        const block = document.createElement("div");
-        block.className = "group-distance-block";
-        block.innerHTML = `<div class="group-distance-title">${distance} m</div>`;
-
-        Array.from({ length: state.groupCount }, (_, playerIndex) => {
-          const result = hole.players[playerIndex].results[puttIndex];
-          const playerName = state.groupNames[playerIndex]?.trim() || `Spelare ${playerIndex + 1}`;
-
-          const row = document.createElement("div");
-          row.className = "group-player-row";
-          row.innerHTML = `
-            <div class="group-player-name">${playerName}</div>
-            <button class="mini-btn hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
-            <button class="mini-btn miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
-            <button class="mini-btn reset" data-hole="${holeIndex}" data-player="${playerIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
-          `;
-          block.appendChild(row);
-        });
-
-        distancesWrap.appendChild(block);
-      });
-
-      wrap.querySelectorAll("button[data-player]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const hole = Number(btn.dataset.hole);
-          const player = Number(btn.dataset.player);
-          const putt = Number(btn.dataset.putt);
-          const value = btn.dataset.value;
-
-          if (value === "hit") setGroupResult(hole, player, putt, true);
-          if (value === "miss") setGroupResult(hole, player, putt, false);
-          if (value === "reset") resetGroupPutt(hole, player, putt);
-        });
-      });
-
-      wrap.querySelector("#prevHoleBtn").addEventListener("click", () => {
-        if (state.currentGroupHole > 0) {
-          state.currentGroupHole -= 1;
-          saveState();
-          renderAll();
-        }
-      });
-
-      wrap.querySelector("#nextHoleBtn").addEventListener("click", () => {
-        if (state.currentGroupHole < 17) {
-          state.currentGroupHole += 1;
-          saveState();
-          renderAll();
-        }
-      });
     }
 
     function renderOverview() {
       if (state.mode === "solo") {
         const stats = getSoloStats();
-        document.getElementById("overviewCard").innerHTML = `
+        dom.overviewCard.innerHTML = `
           <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Översikt</div>
           <div style="display:grid; gap:10px;">
             <div>Satta puttar: <strong>${stats.totalMade}</strong></div>
@@ -1116,41 +884,37 @@
             <div>BOM: <strong>${stats.bombs}</strong></div>
           </div>
         `;
-      } else {
-        const standings = getGroupStandings();
-        document.getElementById("overviewCard").innerHTML = `
-          <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Gruppöversikt</div>
-          <div style="display:grid; gap:10px;">
-            ${standings.map((player, index) => `
-              <div class="standing-row">
-                <div class="standing-left">
-                  <div class="standing-rank">${index + 1}</div>
-                  <div>
-                    <div class="standing-name">${player.name}</div>
-                    <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks} • BOM ${player.bombs}</div>
-                  </div>
-                </div>
-                <div class="standing-score">${player.totalMade}</div>
-              </div>
-            `).join("")}
-          </div>
-        `;
+        return;
       }
+
+      const standings = getGroupStandings();
+      dom.overviewCard.innerHTML = `
+        <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Gruppöversikt</div>
+        <div style="display:grid; gap:10px;">
+          ${standings.map((player, index) => `
+            <div class="standing-row">
+              <div class="standing-left">
+                <div class="standing-rank">${index + 1}</div>
+                <div>
+                  <div class="standing-name">${player.name}</div>
+                  <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks} • BOM ${player.bombs}</div>
+                </div>
+              </div>
+              <div class="standing-score">${player.totalMade}</div>
+            </div>
+          `).join("")}
+        </div>
+      `;
     }
 
     function getBestPerPlayer(rows) {
       const bestMap = new Map();
 
-      rows.forEach((row) => {
+      rows.forEach(row => {
         const player = (row.name || "Anonym").trim();
         const existing = bestMap.get(player);
 
-        if (!existing) {
-          bestMap.set(player, row);
-          return;
-        }
-
-        if (row.score > existing.score) {
+        if (!existing || row.score > existing.score) {
           bestMap.set(player, row);
           return;
         }
@@ -1158,9 +922,7 @@
         if (row.score === existing.score) {
           const rowDate = new Date(row.created_at).getTime();
           const existingDate = new Date(existing.created_at).getTime();
-          if (rowDate < existingDate) {
-            bestMap.set(player, row);
-          }
+          if (rowDate < existingDate) bestMap.set(player, row);
         }
       });
 
@@ -1170,179 +932,73 @@
       });
     }
 
-    async function loadLeaderboard() {
-      const list = document.getElementById("leaderboardList");
-      list.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
-
-      const { data, error } = await db
-        .from("scores")
-        .select("id, score, created_at, name, played_at, total_attempts, total_percent, c1_made, c1_attempts, c2_made, c2_attempts, hattricks, bombs, mode")
-        .order("created_at", { ascending: true });
-
-      if (error) {
-        list.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda highscore: ${error.message}</div>`;
+    function renderLeaderboard(rows) {
+      if (!rows || !rows.length) {
+        dom.leaderboardList.innerHTML = `<div style="color: var(--muted);">Ingen highscore sparad ännu.</div>`;
         return;
       }
 
-      allSavedRounds = data || [];
+      const topRows = getBestPerPlayer(rows).slice(0, 10);
 
-      if (!data || !data.length) {
-        list.innerHTML = `<div style="color: var(--muted);">Ingen highscore sparad ännu.</div>`;
-        renderMyStats();
-        return;
-      }
-
-      const rows = getBestPerPlayer(data).slice(0, 10);
-
-      list.innerHTML = "";
-      rows.forEach((row, index) => {
+      dom.leaderboardList.innerHTML = topRows.map((row, index) => {
         const player = row.name || "Anonym";
         const date = row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE");
-
         const medalClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : "";
         const medalEmoji = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`;
 
-        const item = document.createElement("div");
-        item.className = `leaderboard-row ${medalClass}`;
-        item.innerHTML = `
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div class="leaderboard-rank ${medalClass}">${medalEmoji}</div>
-            <div>
-              <div style="font-weight:800;">${player}</div>
-              <div class="leaderboard-meta">${date}</div>
+        return `
+          <div class="leaderboard-row ${medalClass}">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="leaderboard-rank ${medalClass}">${medalEmoji}</div>
+              <div>
+                <div style="font-weight:800;">${player}</div>
+                <div class="leaderboard-meta">${date}</div>
+              </div>
             </div>
+            <div class="leaderboard-score">${row.score}</div>
           </div>
-          <div class="leaderboard-score">${row.score}</div>
         `;
-        list.appendChild(item);
-      });
-
-      renderMyStats();
+      }).join("");
     }
 
-    function getStatsRowsForPlayer(name) {
-      return allSavedRounds
-        .filter(row => (row.name || "Anonym").trim() === name)
-        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    }
-
-    function avg(values) {
-      if (!values.length) return 0;
-      return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
-    }
-
-    function renderMyStats() {
-      const select = document.getElementById("statsPlayerSelect");
-      const grid = document.getElementById("statsGrid");
-      const history = document.getElementById("roundHistory");
-
-      const names = [...new Set(allSavedRounds.map(r => (r.name || "Anonym").trim()))].sort((a, b) => a.localeCompare(b, "sv"));
-
-      if (!names.length) {
-        select.innerHTML = `<option>Inga spelare ännu</option>`;
-        grid.innerHTML = `<div class="stats-box"><div class="label">Status</div><div class="value" style="font-size:18px;">Ingen data</div></div>`;
-        history.innerHTML = `<div class="history-row"><div>Inga rundor sparade ännu.</div></div>`;
+    async function loadLeaderboard(force = false) {
+      if (leaderboardCache && !force) {
+        renderLeaderboard(leaderboardCache);
         return;
       }
 
-      const currentValue = select.value && names.includes(select.value) ? select.value : names[0];
-      select.innerHTML = names.map(name => `<option value="${name}" ${name === currentValue ? "selected" : ""}>${name}</option>`).join("");
+      dom.leaderboardList.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
 
-      const playerRows = getStatsRowsForPlayer(currentValue);
-      const rounds = playerRows.length;
+      const { data, error } = await db
+        .from("scores")
+        .select("id, score, created_at, name, played_at")
+        .order("created_at", { ascending: true });
 
-      const avgScore = avg(playerRows.map(r => Number(r.score || 0)));
-      const bestScore = Math.max(...playerRows.map(r => Number(r.score || 0)));
-      const avgPercent = avg(playerRows.map(r => Number(r.total_percent || 0)));
-      const avgC1 = avg(playerRows.map(r => {
-        const made = Number(r.c1_made || 0);
-        const attempts = Number(r.c1_attempts || 0);
-        return attempts ? Math.round((made / attempts) * 100) : 0;
-      }));
-      const avgC2 = avg(playerRows.map(r => {
-        const made = Number(r.c2_made || 0);
-        const attempts = Number(r.c2_attempts || 0);
-        return attempts ? Math.round((made / attempts) * 100) : 0;
-      }));
-      const avgHattrick = avg(playerRows.map(r => Number(r.hattricks || 0)));
+      if (error) {
+        dom.leaderboardList.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda highscore: ${error.message}</div>`;
+        return;
+      }
 
-      grid.innerHTML = `
-        <div class="stats-box">
-          <div class="label">Rundor</div>
-          <div class="value">${rounds}</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Bästa score</div>
-          <div class="value">${bestScore}</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Snittscore</div>
-          <div class="value">${avgScore}</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Snitt %</div>
-          <div class="value">${avgPercent}%</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Snitt C1</div>
-          <div class="value">${avgC1}%</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Snitt C2</div>
-          <div class="value">${avgC2}%</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Snitt HATTRICK</div>
-          <div class="value">${avgHattrick}</div>
-        </div>
-        <div class="stats-box">
-          <div class="label">Senaste läge</div>
-          <div class="value" style="font-size:18px;">${playerRows[0]?.played_at || "-"}</div>
-        </div>
-      `;
-
-      history.innerHTML = "";
-      playerRows.slice(0, 10).forEach((row) => {
-        const item = document.createElement("div");
-        item.className = "history-row";
-        item.innerHTML = `
-          <div>
-            <div style="font-weight:800;">${row.score} poäng</div>
-            <div class="history-meta">${row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE")} • ${row.total_percent || 0}% • C1 ${row.c1_made || 0}/${row.c1_attempts || 0} • C2 ${row.c2_made || 0}/${row.c2_attempts || 0}</div>
-          </div>
-          <div style="font-weight:800;">${row.mode === "group" ? "Grupp" : "Solo"}</div>
-        `;
-        history.appendChild(item);
-      });
+      leaderboardCache = data || [];
+      renderLeaderboard(leaderboardCache);
     }
 
     async function saveCurrentScoreToHighscore() {
       if (state.mode === "solo") {
         const stats = getSoloStats();
-        const row = {
-          score: stats.totalMade,
-          name: (state.playerName || "").trim() || "Anonym",
-          played_at: state.playedAt || new Date().toISOString().slice(0, 10),
-          total_attempts: stats.totalAttempts,
-          total_percent: stats.totalPercent,
-          c1_made: stats.c1Made,
-          c1_attempts: stats.c1Attempts,
-          c2_made: stats.c2Made,
-          c2_attempts: stats.c2Attempts,
-          hattricks: stats.hattricks,
-          bombs: stats.bombs,
-          mode: "solo"
-        };
+        const score = stats.totalMade;
+        const name = (state.playerName || "").trim() || "Anonym";
+        const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
 
-        const { error } = await db.from("scores").insert([row]);
-
+        const { error } = await db.from("scores").insert([{ score, name, played_at }]);
         if (error) {
-          alert("Fel när rundan skulle sparas: " + error.message);
+          alert("Fel när highscore skulle sparas: " + error.message);
           return;
         }
 
-        alert("Rundan sparad!");
-        loadLeaderboard();
+        leaderboardCache = null;
+        alert("Highscore sparad!");
+        loadLeaderboard(true);
         return;
       }
 
@@ -1351,28 +1007,198 @@
         return {
           score: stats.totalMade,
           name: (state.groupNames[index] || "").trim() || `Spelare ${index + 1}`,
-          played_at: state.playedAt || new Date().toISOString().slice(0, 10),
-          total_attempts: stats.totalAttempts,
-          total_percent: stats.totalPercent,
-          c1_made: stats.c1Made,
-          c1_attempts: stats.c1Attempts,
-          c2_made: stats.c2Made,
-          c2_attempts: stats.c2Attempts,
-          hattricks: stats.hattricks,
-          bombs: stats.bombs,
-          mode: "group"
+          played_at: state.playedAt || new Date().toISOString().slice(0, 10)
         };
       });
 
       const { error } = await db.from("scores").insert(rows);
-
       if (error) {
         alert("Fel när gruppresultat skulle sparas: " + error.message);
         return;
       }
 
+      leaderboardCache = null;
       alert("Gruppresultat sparat!");
-      loadLeaderboard();
+      loadLeaderboard(true);
+    }
+
+    function buildSoloHistoryRow(userId) {
+      const stats = getSoloStats();
+      return {
+        user_id: userId,
+        played_at: state.playedAt || new Date().toISOString().slice(0, 10),
+        name: (state.playerName || "").trim() || "Anonym",
+        mode: "solo",
+        score: stats.totalMade,
+        attempts: stats.totalAttempts,
+        total_percent: stats.totalPercent,
+        c1_made: stats.c1Made,
+        c1_attempts: stats.c1Attempts,
+        c1_percent: stats.c1Percent,
+        c2_made: stats.c2Made,
+        c2_attempts: stats.c2Attempts,
+        c2_percent: stats.c2Percent,
+        hattricks: stats.hattricks,
+        bombs: stats.bombs
+      };
+    }
+
+    function buildGroupHistoryRows(userId) {
+      return Array.from({ length: state.groupCount }, (_, index) => {
+        const stats = getSinglePlayerGroupStats(index);
+        return {
+          user_id: userId,
+          played_at: state.playedAt || new Date().toISOString().slice(0, 10),
+          name: (state.groupNames[index] || "").trim() || `Spelare ${index + 1}`,
+          mode: "group",
+          score: stats.totalMade,
+          attempts: stats.totalAttempts,
+          total_percent: stats.totalPercent,
+          c1_made: stats.c1Made,
+          c1_attempts: stats.c1Attempts,
+          c1_percent: stats.c1Percent,
+          c2_made: stats.c2Made,
+          c2_attempts: stats.c2Attempts,
+          c2_percent: stats.c2Percent,
+          hattricks: stats.hattricks,
+          bombs: stats.bombs
+        };
+      });
+    }
+
+    async function saveCurrentRoundToHistory() {
+      const user = await ensureSignedIn();
+      const rows = state.mode === "solo"
+        ? [buildSoloHistoryRow(user.id)]
+        : buildGroupHistoryRows(user.id);
+
+      const { error } = await db.from("round_history").insert(rows);
+      if (error) {
+        alert("Fel när privat statistik skulle sparas: " + error.message);
+        return;
+      }
+
+      alert("Din statistik är sparad.");
+      if (document.getElementById("section-stats").classList.contains("active")) {
+        loadMyHistory();
+      }
+    }
+
+    function calculatePlayerStats(rows) {
+      const rounds = rows.length;
+      const totalScore = rows.reduce((sum, row) => sum + row.score, 0);
+      const totalAttempts = rows.reduce((sum, row) => sum + row.attempts, 0);
+      const totalC1Made = rows.reduce((sum, row) => sum + row.c1_made, 0);
+      const totalC1Attempts = rows.reduce((sum, row) => sum + row.c1_attempts, 0);
+      const totalC2Made = rows.reduce((sum, row) => sum + row.c2_made, 0);
+      const totalC2Attempts = rows.reduce((sum, row) => sum + row.c2_attempts, 0);
+      const totalHattricks = rows.reduce((sum, row) => sum + row.hattricks, 0);
+      const totalBombs = rows.reduce((sum, row) => sum + row.bombs, 0);
+
+      const bestScore = rounds ? Math.max(...rows.map(r => r.score)) : 0;
+      const latestRow = rows[0] || null;
+
+      return {
+        rounds,
+        averageScore: rounds ? (totalScore / rounds).toFixed(1) : "0.0",
+        bestScore,
+        latestScore: latestRow ? latestRow.score : 0,
+        totalPercent: totalAttempts ? Math.round((totalScore / totalAttempts) * 100) : 0,
+        c1Percent: totalC1Attempts ? Math.round((totalC1Made / totalC1Attempts) * 100) : 0,
+        c2Percent: totalC2Attempts ? Math.round((totalC2Made / totalC2Attempts) * 100) : 0,
+        totalHattricks,
+        totalBombs
+      };
+    }
+
+    function renderMyStats(rows) {
+      if (!rows.length) {
+        dom.statsSummaryCards.innerHTML = "";
+        dom.statsHistoryList.innerHTML = `<div style="color: var(--muted);">Ingen privat historik sparad ännu.</div>`;
+        return;
+      }
+
+      const stats = calculatePlayerStats(rows);
+
+      dom.statsSummaryCards.innerHTML = `
+        <div class="card summary-card">
+          <div class="label">Rundor</div>
+          <div class="value">${stats.rounds}</div>
+          <div class="sub">Totalt</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Snittscore</div>
+          <div class="value">${stats.averageScore}</div>
+          <div class="sub">Satta per runda</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Bästa score</div>
+          <div class="value">${stats.bestScore}</div>
+          <div class="sub">Personbästa</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Senaste</div>
+          <div class="value">${stats.latestScore}</div>
+          <div class="sub">Senaste rundan</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Total %</div>
+          <div class="value">${stats.totalPercent}%</div>
+          <div class="sub">Alla försök</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">C1</div>
+          <div class="value">${stats.c1Percent}%</div>
+          <div class="sub">5–10 meter</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">C2</div>
+          <div class="value">${stats.c2Percent}%</div>
+          <div class="sub">11–23 meter</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Hattricks</div>
+          <div class="value">${stats.totalHattricks}</div>
+          <div class="sub">Totalt</div>
+        </div>
+      `;
+
+      dom.statsHistoryList.innerHTML = `
+        <div style="font-size:20px; font-weight:800; margin:12px 0 10px;">Historik</div>
+        <div style="display:grid; gap:10px;">
+          ${rows.map(row => `
+            <div class="standing-row">
+              <div class="standing-left">
+                <div>
+                  <div class="standing-name">${row.played_at || "-"}</div>
+                  <div class="standing-meta">${row.mode} • C1 ${row.c1_made}/${row.c1_attempts} • C2 ${row.c2_made}/${row.c2_attempts} • HATTRICK ${row.hattricks} • BOM ${row.bombs}</div>
+                </div>
+              </div>
+              <div class="standing-score">${row.score}</div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    async function loadMyHistory() {
+      dom.statsSummaryCards.innerHTML = "";
+      dom.statsHistoryList.innerHTML = `<div style="color: var(--muted);">Laddar privat statistik...</div>`;
+
+      const user = await ensureSignedIn();
+      const { data, error } = await db
+        .from("round_history")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("played_at", { ascending: false })
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        dom.statsHistoryList.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda statistik: ${error.message}</div>`;
+        return;
+      }
+
+      renderMyStats(data || []);
     }
 
     function activateTab(tabName) {
@@ -1386,63 +1212,50 @@
 
       document.getElementById("section-" + tabName).classList.add("active");
 
-      if (tabName === "highscore" || tabName === "mystats") {
-        loadLeaderboard();
-      }
+      if (tabName === "highscore") loadLeaderboard();
+      if (tabName === "stats") loadMyHistory();
     }
 
     function renderGroupFields() {
-      const wrap = document.getElementById("groupFields");
-      wrap.innerHTML = "";
-
-      for (let i = 0; i < state.groupCount; i++) {
-        const field = document.createElement("div");
-        field.className = "field";
-        field.style.marginBottom = "10px";
-        field.innerHTML = `
+      dom.groupFields.innerHTML = Array.from({ length: state.groupCount }, (_, i) => `
+        <div class="field" style="margin-bottom:10px;">
           <label for="groupPlayer${i}">Spelare ${i + 1}</label>
           <input id="groupPlayer${i}" type="text" placeholder="Skriv namn" value="${state.groupNames[i] || ""}">
-        `;
-        wrap.appendChild(field);
-      }
-
-      for (let i = 0; i < state.groupCount; i++) {
-        const input = document.getElementById(`groupPlayer${i}`);
-        input.addEventListener("input", (e) => {
-          state.groupNames[i] = e.target.value;
-          saveState();
-        });
-      }
+        </div>
+      `).join("");
     }
 
     function renderModeUI() {
-      document.getElementById("modeSoloBtn").classList.toggle("active", state.mode === "solo");
-      document.getElementById("modeGroupBtn").classList.toggle("active", state.mode === "group");
+      dom.modeSoloBtn.classList.toggle("active", state.mode === "solo");
+      dom.modeGroupBtn.classList.toggle("active", state.mode === "group");
 
-      document.getElementById("soloFields").style.display = state.mode === "solo" ? "block" : "none";
-      document.getElementById("groupFields").style.display = state.mode === "group" ? "block" : "none";
-      document.getElementById("groupCountWrap").style.display = state.mode === "group" ? "block" : "none";
+      dom.soloFields.style.display = state.mode === "solo" ? "block" : "none";
+      dom.groupFields.style.display = state.mode === "group" ? "block" : "none";
+      dom.groupCountWrap.style.display = state.mode === "group" ? "block" : "none";
 
-      document.getElementById("soloRoundContainer").style.display = state.mode === "solo" ? "block" : "none";
-      document.getElementById("groupRoundContainer").style.display = state.mode === "group" ? "block" : "none";
+      dom.soloRoundContainer.style.display = state.mode === "solo" ? "block" : "none";
+      dom.groupRoundContainer.style.display = state.mode === "group" ? "block" : "none";
 
-      document.getElementById("groupCount").value = String(state.groupCount);
-      document.getElementById("playerName").value = state.playerName || "";
-      document.getElementById("playedAt").value = state.playedAt || new Date().toISOString().slice(0, 10);
+      dom.groupCount.value = String(state.groupCount);
+      dom.playerName.value = state.playerName || "";
+      dom.playedAt.value = state.playedAt || new Date().toISOString().slice(0, 10);
 
       renderGroupFields();
+    }
+
+    function renderAfterScoreChange() {
+      renderSummary();
+      renderOverview();
+      if (state.mode === "solo") renderSoloRound();
+      else renderGroupRound();
     }
 
     function renderAll() {
       renderModeUI();
       renderSummary();
       renderOverview();
-
-      if (state.mode === "solo") {
-        renderSoloRound();
-      } else {
-        renderGroupRound();
-      }
+      if (state.mode === "solo") renderSoloRound();
+      else renderGroupRound();
     }
 
     document.getElementById("newRoundBtn").addEventListener("click", () => {
@@ -1456,24 +1269,25 @@
     });
 
     document.getElementById("saveHighscoreBtn").addEventListener("click", saveCurrentScoreToHighscore);
+    document.getElementById("saveHistoryBtn").addEventListener("click", saveCurrentRoundToHistory);
 
     document.querySelectorAll(".tabs .btn").forEach(btn => {
       btn.addEventListener("click", () => activateTab(btn.dataset.tab));
     });
 
-    document.getElementById("modeSoloBtn").addEventListener("click", () => {
+    dom.modeSoloBtn.addEventListener("click", () => {
       state.mode = "solo";
       saveState();
       renderAll();
     });
 
-    document.getElementById("modeGroupBtn").addEventListener("click", () => {
+    dom.modeGroupBtn.addEventListener("click", () => {
       state.mode = "group";
       saveState();
       renderAll();
     });
 
-    document.getElementById("groupCount").addEventListener("change", (e) => {
+    dom.groupCount.addEventListener("change", (e) => {
       const count = Number(e.target.value);
       state.groupCount = count;
       state.groupHoles = makeGroupHoles(count);
@@ -1482,20 +1296,69 @@
       renderAll();
     });
 
-    document.getElementById("playerName").addEventListener("input", (e) => {
+    dom.playerName.addEventListener("input", (e) => {
       state.playerName = e.target.value;
-      saveState();
+      saveStateDebounced();
     });
 
-    document.getElementById("playedAt").addEventListener("input", (e) => {
+    dom.playedAt.addEventListener("input", (e) => {
       state.playedAt = e.target.value;
-      saveState();
+      saveStateDebounced();
     });
 
-    document.getElementById("statsPlayerSelect").addEventListener("change", renderMyStats);
+    dom.groupFields.addEventListener("input", (e) => {
+      if (!e.target.id.startsWith("groupPlayer")) return;
+      const index = Number(e.target.id.replace("groupPlayer", ""));
+      state.groupNames[index] = e.target.value;
+      saveStateDebounced();
+    });
+
+    dom.soloRoundContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-hole]");
+      if (!btn) return;
+
+      const hole = Number(btn.dataset.hole);
+      const putt = Number(btn.dataset.putt);
+      const value = btn.dataset.value;
+
+      if (value === "hit") setSoloResult(hole, putt, true);
+      if (value === "miss") setSoloResult(hole, putt, false);
+      if (value === "reset") resetSoloPutt(hole, putt);
+    });
+
+    dom.groupRoundContainer.addEventListener("click", (e) => {
+      const holeBtn = e.target.closest("button[data-player]");
+      if (holeBtn) {
+        const hole = Number(holeBtn.dataset.hole);
+        const player = Number(holeBtn.dataset.player);
+        const putt = Number(holeBtn.dataset.putt);
+        const value = holeBtn.dataset.value;
+
+        if (value === "hit") setGroupResult(hole, player, putt, true);
+        if (value === "miss") setGroupResult(hole, player, putt, false);
+        if (value === "reset") resetGroupPutt(hole, player, putt);
+        return;
+      }
+
+      const prevBtn = e.target.closest("#prevHoleBtn");
+      if (prevBtn && state.currentGroupHole > 0) {
+        state.currentGroupHole -= 1;
+        saveState();
+        renderAll();
+        return;
+      }
+
+      const nextBtn = e.target.closest("#nextHoleBtn");
+      if (nextBtn && state.currentGroupHole < 17) {
+        state.currentGroupHole += 1;
+        saveState();
+        renderAll();
+      }
+    });
 
     renderAll();
     loadLeaderboard();
+    ensureSignedIn().catch(() => {});
   </script>
 </body>
 </html>
