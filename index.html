@@ -14,19 +14,25 @@
       --text: #0f172a;
       --muted: #64748b;
       --primary: #0f172a;
+
       --green: #22c55e;
       --green-strong: #16a34a;
       --green-soft: #dcfce7;
+
       --red: #ef4444;
       --red-strong: #dc2626;
       --red-soft: #fee2e2;
+
       --yellow: #facc15;
       --yellow-strong: #eab308;
       --yellow-soft: #fef3c7;
+
       --blue: #2563eb;
+
       --gold: #f59e0b;
       --silver: #94a3b8;
       --bronze: #b45309;
+
       --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
       --radius: 22px;
     }
@@ -47,8 +53,21 @@
     }
 
     .topbar { margin-bottom: 14px; }
-    .title { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
-    .subtitle { color: var(--muted); font-size: 16px; line-height: 1.35; margin-bottom: 14px; }
+
+    .title {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+
     .help {
       background: #eef5ff;
       border: 1px solid #bfd7ff;
@@ -60,7 +79,12 @@
       margin-bottom: 14px;
     }
 
-    .row { display: grid; gap: 12px; margin-bottom: 12px; }
+    .row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
     .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
     .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
@@ -78,10 +102,28 @@
       box-shadow: var(--shadow);
     }
 
-    .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .btn.danger { border-color: #fca5a5; color: #dc2626; background: #fff; }
-    .btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn.danger {
+      border-color: #fca5a5;
+      color: #dc2626;
+      background: #fff;
+    }
+
+    .btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
 
     .card {
       background: var(--card);
@@ -91,9 +133,23 @@
       padding: 16px;
     }
 
-    .summary-card .label { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
-    .summary-card .value { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
-    .summary-card .sub { color: var(--muted); font-size: 13px; }
+    .summary-card .label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card .value {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .summary-card .sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
 
     .section { display: none; }
     .section.active { display: block; }
@@ -123,12 +179,17 @@
       color: var(--text);
     }
 
-    .hole-card { margin-bottom: 18px; transition: 0.2s ease; }
+    .hole-card {
+      margin-bottom: 18px;
+      transition: 0.2s ease;
+    }
+
     .hole-card.hattrick {
       background: var(--yellow-soft);
       border: 3px solid var(--yellow-strong);
       box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.45);
     }
+
     .hole-card.bom {
       background: var(--red-soft);
       border: 3px solid var(--red-strong);
@@ -144,7 +205,10 @@
       flex-wrap: wrap;
     }
 
-    .hole-title { font-size: 26px; font-weight: 800; }
+    .hole-title {
+      font-size: 26px;
+      font-weight: 800;
+    }
 
     .badges {
       display: flex;
@@ -162,8 +226,17 @@
       background: #f1f5f9;
     }
 
-    .badge.hattrick { background: #fff1b8; border-color: #eab308; color: #854d0e; }
-    .badge.bom { background: #ffd6d6; border-color: #dc2626; color: #991b1b; }
+    .badge.hattrick {
+      background: #fff1b8;
+      border-color: #eab308;
+      color: #854d0e;
+    }
+
+    .badge.bom {
+      background: #ffd6d6;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
 
     .putt-card {
       background: #f8fafc;
@@ -173,10 +246,22 @@
       margin-bottom: 12px;
     }
 
-    .putt-card.hit { background: var(--green-soft); border-color: #86efac; }
-    .putt-card.miss { background: var(--red-soft); border-color: #fca5a5; }
+    .putt-card.hit {
+      background: var(--green-soft);
+      border-color: #86efac;
+    }
 
-    .distance { text-align: center; font-size: 21px; font-weight: 800; margin-bottom: 12px; }
+    .putt-card.miss {
+      background: var(--red-soft);
+      border-color: #fca5a5;
+    }
+
+    .distance {
+      text-align: center;
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
 
     .putt-actions {
       display: grid;
@@ -185,7 +270,9 @@
       margin-bottom: 10px;
     }
 
-    .btn-hit, .btn-miss, .btn-reset {
+    .btn-hit,
+    .btn-miss,
+    .btn-reset {
       min-height: 60px;
       border-radius: 18px;
       font-size: 17px;
@@ -195,7 +282,12 @@
       cursor: pointer;
     }
 
-    .btn-hit { color: var(--green-strong); border-color: #86efac; }
+    .btn-hit {
+      background: #ffffff;
+      color: var(--green-strong);
+      border-color: #86efac;
+    }
+
     .btn-hit.active {
       background: var(--green);
       color: white;
@@ -203,7 +295,12 @@
       box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
     }
 
-    .btn-miss { color: var(--red-strong); border-color: #fca5a5; }
+    .btn-miss {
+      background: #ffffff;
+      color: var(--red-strong);
+      border-color: #fca5a5;
+    }
+
     .btn-miss.active {
       background: var(--red);
       color: white;
@@ -214,13 +311,18 @@
     .btn-reset {
       width: 100%;
       min-height: 50px;
+      background: #fff;
       color: var(--blue);
       border: 2px solid var(--line);
     }
 
-    .leaderboard-list { display: grid; gap: 12px; margin-top: 12px; }
+    .leaderboard-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
 
-    .leaderboard-row, .standing-row {
+    .leaderboard-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -249,14 +351,42 @@
       box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
     }
 
-    .leaderboard-rank { font-weight: 800; min-width: 34px; font-size: 18px; }
+    .leaderboard-rank {
+      font-weight: 800;
+      min-width: 34px;
+      font-size: 18px;
+    }
+
     .leaderboard-rank.gold { color: var(--gold); }
     .leaderboard-rank.silver { color: var(--silver); }
     .leaderboard-rank.bronze { color: var(--bronze); }
 
-    .leaderboard-meta, .standing-meta { color: var(--muted); font-size: 13px; }
+    .leaderboard-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-    .leaderboard-score, .standing-score { font-size: 24px; font-weight: 800; }
+    .leaderboard-score {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .group-standings {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .standing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
 
     .standing-left {
       display: flex;
@@ -264,10 +394,25 @@
       gap: 10px;
     }
 
-    .standing-rank { width: 30px; font-weight: 800; text-align: center; }
-    .standing-name { font-weight: 800; }
+    .standing-rank {
+      width: 30px;
+      font-weight: 800;
+      text-align: center;
+    }
 
-    .group-standings { display: grid; gap: 10px; margin-bottom: 14px; }
+    .standing-name {
+      font-weight: 800;
+    }
+
+    .standing-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .standing-score {
+      font-weight: 800;
+      font-size: 22px;
+    }
 
     .group-hole-nav {
       display: grid;
@@ -300,8 +445,13 @@
       border-top: 1px solid #e5e7eb;
     }
 
-    .group-player-row:first-of-type { border-top: none; }
-    .group-player-name { font-weight: 700; }
+    .group-player-row:first-of-type {
+      border-top: none;
+    }
+
+    .group-player-name {
+      font-weight: 700;
+    }
 
     .mini-btn {
       min-height: 46px;
@@ -313,11 +463,31 @@
       cursor: pointer;
     }
 
-    .mini-btn.hit { color: var(--green-strong); border-color: #86efac; }
-    .mini-btn.hit.active { background: var(--green); color: #fff; border-color: var(--green-strong); }
-    .mini-btn.miss { color: var(--red-strong); border-color: #fca5a5; }
-    .mini-btn.miss.active { background: var(--red); color: #fff; border-color: var(--red-strong); }
-    .mini-btn.reset { color: var(--blue); }
+    .mini-btn.hit {
+      color: var(--green-strong);
+      border-color: #86efac;
+    }
+
+    .mini-btn.hit.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green-strong);
+    }
+
+    .mini-btn.miss {
+      color: var(--red-strong);
+      border-color: #fca5a5;
+    }
+
+    .mini-btn.miss.active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red-strong);
+    }
+
+    .mini-btn.reset {
+      color: var(--blue);
+    }
 
     .footer-note {
       color: var(--muted);
@@ -331,9 +501,15 @@
       .grid-3 { grid-template-columns: 1fr; }
       .field-grid { grid-template-columns: 1fr; }
       .title { font-size: 32px; }
-      .group-player-row { grid-template-columns: 1fr 1fr 1fr; }
-      .group-player-row .mini-btn.reset { grid-column: 1 / -1; }
-      .group-hole-nav { grid-template-columns: 1fr; }
+      .group-player-row {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .group-player-row .mini-btn.reset {
+        grid-column: 1 / -1;
+      }
+      .group-hole-nav {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -415,7 +591,7 @@
       <div class="card">
         <div style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Min statistik</div>
         <div style="color: var(--muted); font-size: 14px; margin-bottom: 14px;">
-          Den här statistiken är privat och kopplad till din enhet/inloggning.
+          Den här statistiken är privat och kopplad till din enhet.
         </div>
         <div id="statsSummaryCards" class="row grid-4"></div>
         <div id="statsHistoryList"></div>
@@ -434,7 +610,22 @@
       "sb_publishable_LrVtDfk9SqNwWHQH7rQz2g_MNo_9HbY"
     );
 
-    const STORAGE_KEY = "puttingbana_group_v3";
+    async function ensureSignedIn() {
+      const { data: { session } } = await db.auth.getSession();
+
+      if (session?.user) return session.user;
+
+      const { data, error } = await db.auth.signInAnonymously();
+
+      if (error) {
+        alert("Kunde inte skapa privat användare: " + error.message);
+        throw error;
+      }
+
+      return data.user;
+    }
+
+    const STORAGE_KEY = "puttingbana_group_v4";
     let leaderboardCache = null;
     let saveTimer = null;
 
@@ -539,18 +730,6 @@
       saveTimer = setTimeout(saveState, delay);
     }
 
-    async function ensureSignedIn() {
-      const { data: { session } } = await db.auth.getSession();
-      if (session?.user) return session.user;
-
-      const { data, error } = await db.auth.signInAnonymously();
-      if (error) {
-        alert("Kunde inte skapa privat användare: " + error.message);
-        throw error;
-      }
-      return data.user;
-    }
-
     function resetAllNewRound() {
       state = createNewState();
       saveState();
@@ -593,14 +772,19 @@
     }
 
     function getSoloStats() {
-      let totalMade = 0, totalAttempts = 0;
-      let c1Made = 0, c1Attempts = 0;
-      let c2Made = 0, c2Attempts = 0;
-      let hattricks = 0, bombs = 0;
+      let totalMade = 0;
+      let totalAttempts = 0;
+      let c1Made = 0;
+      let c1Attempts = 0;
+      let c2Made = 0;
+      let c2Attempts = 0;
+      let hattricks = 0;
+      let bombs = 0;
 
       state.soloHoles.forEach(hole => {
         const made = hole.results.filter(v => v === true).length;
         const missed = hole.results.filter(v => v === false).length;
+
         if (made === 3) hattricks++;
         if (missed === 3) bombs++;
 
@@ -636,10 +820,14 @@
     }
 
     function getSinglePlayerGroupStats(playerIndex) {
-      let totalMade = 0, totalAttempts = 0;
-      let c1Made = 0, c1Attempts = 0;
-      let c2Made = 0, c2Attempts = 0;
-      let hattricks = 0, bombs = 0;
+      let totalMade = 0;
+      let totalAttempts = 0;
+      let c1Made = 0;
+      let c1Attempts = 0;
+      let c2Made = 0;
+      let c2Attempts = 0;
+      let hattricks = 0;
+      let bombs = 0;
 
       state.groupHoles.forEach(hole => {
         const player = hole.players[playerIndex];
@@ -648,6 +836,7 @@
         const results = player.results;
         const made = results.filter(v => v === true).length;
         const missed = results.filter(v => v === false).length;
+
         if (made === 3) hattricks++;
         if (missed === 3) bombs++;
 
@@ -701,35 +890,39 @@
       const standings = getGroupStandings();
       const leader = standings[0];
 
-      return leader ? {
-        totalMade: leader.totalMade,
-        totalAttempts: leader.totalAttempts,
-        totalPercent: leader.totalPercent,
-        c1Made: leader.c1Made,
-        c1Attempts: leader.c1Attempts,
-        c1Percent: leader.c1Percent,
-        c2Made: leader.c2Made,
-        c2Attempts: leader.c2Attempts,
-        c2Percent: leader.c2Percent,
-        leaderName: leader.name
-      } : {
-        totalMade: 0,
-        totalAttempts: 0,
-        totalPercent: 0,
-        c1Made: 0,
-        c1Attempts: 0,
-        c1Percent: 0,
-        c2Made: 0,
-        c2Attempts: 0,
-        c2Percent: 0,
-        leaderName: "-"
-      };
+      return leader
+        ? {
+            totalMade: leader.totalMade,
+            totalAttempts: leader.totalAttempts,
+            totalPercent: leader.totalPercent,
+            c1Made: leader.c1Made,
+            c1Attempts: leader.c1Attempts,
+            c1Percent: leader.c1Percent,
+            c2Made: leader.c2Made,
+            c2Attempts: leader.c2Attempts,
+            c2Percent: leader.c2Percent,
+            leaderName: leader.name
+          }
+        : {
+            totalMade: 0,
+            totalAttempts: 0,
+            totalPercent: 0,
+            c1Made: 0,
+            c1Attempts: 0,
+            c1Percent: 0,
+            c2Made: 0,
+            c2Attempts: 0,
+            c2Percent: 0,
+            leaderName: "-"
+          };
     }
 
     function renderSummary() {
+      const wrap = dom.summaryCards;
+
       if (state.mode === "solo") {
         const stats = getSoloStats();
-        dom.summaryCards.innerHTML = `
+        wrap.innerHTML = `
           <div class="card summary-card">
             <div class="label">Satta</div>
             <div class="value">${stats.totalMade}/${stats.totalAttempts || 54}</div>
@@ -751,32 +944,31 @@
             <div class="sub">${stats.c2Percent}%</div>
           </div>
         `;
-        return;
+      } else {
+        const top = getTopGroupSummary();
+        wrap.innerHTML = `
+          <div class="card summary-card">
+            <div class="label">Ledare</div>
+            <div class="value" style="font-size:22px;">${top.leaderName}</div>
+            <div class="sub">Bäst just nu</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa score</div>
+            <div class="value">${top.totalMade}</div>
+            <div class="sub">Satta puttar</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa C1</div>
+            <div class="value">${top.c1Made}/${top.c1Attempts}</div>
+            <div class="sub">${top.c1Percent}%</div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Bästa C2</div>
+            <div class="value">${top.c2Made}/${top.c2Attempts}</div>
+            <div class="sub">${top.c2Percent}%</div>
+          </div>
+        `;
       }
-
-      const top = getTopGroupSummary();
-      dom.summaryCards.innerHTML = `
-        <div class="card summary-card">
-          <div class="label">Ledare</div>
-          <div class="value" style="font-size:22px;">${top.leaderName}</div>
-          <div class="sub">Bäst just nu</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">Bästa score</div>
-          <div class="value">${top.totalMade}</div>
-          <div class="sub">Satta puttar</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">Bästa C1</div>
-          <div class="value">${top.c1Made}/${top.c1Attempts}</div>
-          <div class="sub">${top.c1Percent}%</div>
-        </div>
-        <div class="card summary-card">
-          <div class="label">Bästa C2</div>
-          <div class="value">${top.c2Made}/${top.c2Attempts}</div>
-          <div class="sub">${top.c2Percent}%</div>
-        </div>
-      `;
     }
 
     function renderSoloRound() {
@@ -794,6 +986,7 @@
                 ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
               </div>
             </div>
+
             ${hole.distances.map((distance, puttIndex) => {
               const result = hole.results[puttIndex];
               return `
@@ -845,15 +1038,19 @@
         <div class="card">
           <div class="hole-header">
             <div class="hole-title">Grupphål ${holeIndex + 1}</div>
-            <div class="badges"><div class="badge">Alla spelar samma hål</div></div>
+            <div class="badges">
+              <div class="badge">Alla spelar samma hål</div>
+            </div>
           </div>
 
           ${hole.distances.map((distance, puttIndex) => `
             <div class="group-distance-block">
               <div class="group-distance-title">${distance} m</div>
+
               ${Array.from({ length: state.groupCount }, (_, playerIndex) => {
                 const result = hole.players[playerIndex].results[puttIndex];
                 const playerName = state.groupNames[playerIndex]?.trim() || `Spelare ${playerIndex + 1}`;
+
                 return `
                   <div class="group-player-row">
                     <div class="group-player-name">${playerName}</div>
@@ -884,37 +1081,41 @@
             <div>BOM: <strong>${stats.bombs}</strong></div>
           </div>
         `;
-        return;
-      }
-
-      const standings = getGroupStandings();
-      dom.overviewCard.innerHTML = `
-        <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Gruppöversikt</div>
-        <div style="display:grid; gap:10px;">
-          ${standings.map((player, index) => `
-            <div class="standing-row">
-              <div class="standing-left">
-                <div class="standing-rank">${index + 1}</div>
-                <div>
-                  <div class="standing-name">${player.name}</div>
-                  <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks} • BOM ${player.bombs}</div>
+      } else {
+        const standings = getGroupStandings();
+        dom.overviewCard.innerHTML = `
+          <div style="font-size:24px; font-weight:800; margin-bottom:12px;">Gruppöversikt</div>
+          <div style="display:grid; gap:10px;">
+            ${standings.map((player, index) => `
+              <div class="standing-row">
+                <div class="standing-left">
+                  <div class="standing-rank">${index + 1}</div>
+                  <div>
+                    <div class="standing-name">${player.name}</div>
+                    <div class="standing-meta">C1 ${player.c1Made}/${player.c1Attempts} • C2 ${player.c2Made}/${player.c2Attempts} • HATTRICK ${player.hattricks} • BOM ${player.bombs}</div>
+                  </div>
                 </div>
+                <div class="standing-score">${player.totalMade}</div>
               </div>
-              <div class="standing-score">${player.totalMade}</div>
-            </div>
-          `).join("")}
-        </div>
-      `;
+            `).join("")}
+          </div>
+        `;
+      }
     }
 
     function getBestPerPlayer(rows) {
       const bestMap = new Map();
 
-      rows.forEach(row => {
+      rows.forEach((row) => {
         const player = (row.name || "Anonym").trim();
         const existing = bestMap.get(player);
 
-        if (!existing || row.score > existing.score) {
+        if (!existing) {
+          bestMap.set(player, row);
+          return;
+        }
+
+        if (row.score > existing.score) {
           bestMap.set(player, row);
           return;
         }
@@ -922,7 +1123,9 @@
         if (row.score === existing.score) {
           const rowDate = new Date(row.created_at).getTime();
           const existingDate = new Date(existing.created_at).getTime();
-          if (rowDate < existingDate) bestMap.set(player, row);
+          if (rowDate < existingDate) {
+            bestMap.set(player, row);
+          }
         }
       });
 
@@ -943,6 +1146,7 @@
       dom.leaderboardList.innerHTML = topRows.map((row, index) => {
         const player = row.name || "Anonym";
         const date = row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE");
+
         const medalClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : "";
         const medalEmoji = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`;
 
@@ -991,6 +1195,7 @@
         const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
 
         const { error } = await db.from("scores").insert([{ score, name, played_at }]);
+
         if (error) {
           alert("Fel när highscore skulle sparas: " + error.message);
           return;
@@ -1012,6 +1217,7 @@
       });
 
       const { error } = await db.from("scores").insert(rows);
+
       if (error) {
         alert("Fel när gruppresultat skulle sparas: " + error.message);
         return;
@@ -1024,6 +1230,7 @@
 
     function buildSoloHistoryRow(userId) {
       const stats = getSoloStats();
+
       return {
         user_id: userId,
         played_at: state.playedAt || new Date().toISOString().slice(0, 10),
@@ -1046,6 +1253,7 @@
     function buildGroupHistoryRows(userId) {
       return Array.from({ length: state.groupCount }, (_, index) => {
         const stats = getSinglePlayerGroupStats(index);
+
         return {
           user_id: userId,
           played_at: state.playedAt || new Date().toISOString().slice(0, 10),
@@ -1073,6 +1281,7 @@
         : buildGroupHistoryRows(user.id);
 
       const { error } = await db.from("round_history").insert(rows);
+
       if (error) {
         alert("Fel när privat statistik skulle sparas: " + error.message);
         return;
@@ -1084,7 +1293,7 @@
       }
     }
 
-    function calculatePlayerStats(rows) {
+    function calculateMyStats(rows) {
       const rounds = rows.length;
       const totalScore = rows.reduce((sum, row) => sum + row.score, 0);
       const totalAttempts = rows.reduce((sum, row) => sum + row.attempts, 0);
@@ -1118,7 +1327,7 @@
         return;
       }
 
-      const stats = calculatePlayerStats(rows);
+      const stats = calculateMyStats(rows);
 
       dom.statsSummaryCards.innerHTML = `
         <div class="card summary-card">
@@ -1171,7 +1380,9 @@
               <div class="standing-left">
                 <div>
                   <div class="standing-name">${row.played_at || "-"}</div>
-                  <div class="standing-meta">${row.mode} • C1 ${row.c1_made}/${row.c1_attempts} • C2 ${row.c2_made}/${row.c2_attempts} • HATTRICK ${row.hattricks} • BOM ${row.bombs}</div>
+                  <div class="standing-meta">
+                    ${row.mode} • C1 ${row.c1_made}/${row.c1_attempts} • C2 ${row.c2_made}/${row.c2_attempts} • HATTRICK ${row.hattricks} • BOM ${row.bombs}
+                  </div>
                 </div>
               </div>
               <div class="standing-score">${row.score}</div>
@@ -1186,6 +1397,7 @@
       dom.statsHistoryList.innerHTML = `<div style="color: var(--muted);">Laddar privat statistik...</div>`;
 
       const user = await ensureSignedIn();
+
       const { data, error } = await db
         .from("round_history")
         .select("*")
@@ -1246,16 +1458,24 @@
     function renderAfterScoreChange() {
       renderSummary();
       renderOverview();
-      if (state.mode === "solo") renderSoloRound();
-      else renderGroupRound();
+
+      if (state.mode === "solo") {
+        renderSoloRound();
+      } else {
+        renderGroupRound();
+      }
     }
 
     function renderAll() {
       renderModeUI();
       renderSummary();
       renderOverview();
-      if (state.mode === "solo") renderSoloRound();
-      else renderGroupRound();
+
+      if (state.mode === "solo") {
+        renderSoloRound();
+      } else {
+        renderGroupRound();
+      }
     }
 
     document.getElementById("newRoundBtn").addEventListener("click", () => {
