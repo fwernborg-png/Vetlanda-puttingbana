@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="sv">
+  <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon-32.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vetlanda Puttingbana">
+<meta name="theme-color" content="#111111">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -496,6 +503,272 @@
       margin-top: 18px;
     }
 
+
+
+    /* Version 2.1 – polish */
+    .app { -webkit-tap-highlight-color: transparent; }
+
+    .btn, .btn-hit, .btn-miss, .btn-reset, .mini-btn {
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .btn:active, .btn-hit:active, .btn-miss:active, .btn-reset:active, .mini-btn:active {
+      transform: scale(0.98);
+    }
+
+    .live-card {
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+    }
+
+    .progress-bar {
+      height: 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .live-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .live-stat-value {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .live-stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .result-hero {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border: 3px solid var(--primary);
+      text-align: center;
+    }
+
+    .result-kicker {
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .result-score {
+      font-size: clamp(54px, 12vw, 92px);
+      font-weight: 950;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 8px;
+    }
+
+    .result-percent {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .result-message {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      background: #eef2ff;
+      border: 2px solid #c7d2fe;
+      color: #3730a3;
+      margin-bottom: 14px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .metric-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 27px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .metric-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .scorecard-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .scorecard-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .scorecard-row.perfect {
+      background: var(--yellow-soft);
+      border-color: var(--yellow-strong);
+    }
+
+    .scorecard-row.bom-row {
+      background: var(--red-soft);
+      border-color: var(--red-strong);
+    }
+
+    .scorecard-title {
+      font-weight: 900;
+    }
+
+    .scorecard-icons {
+      font-size: 18px;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .scorecard-score {
+      font-size: 20px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .leaderboard-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .leaderboard-card.gold {
+      background: #fffbeb;
+      border-color: var(--gold);
+    }
+
+    .leaderboard-card.silver {
+      background: #f8fafc;
+      border-color: var(--silver);
+    }
+
+    .leaderboard-card.bronze {
+      background: #fff7ed;
+      border-color: var(--bronze);
+    }
+
+    .leaderboard-medal {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      background: #f1f5f9;
+    }
+
+    .leaderboard-name {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 3px;
+    }
+
+    .leaderboard-date {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .leaderboard-points {
+      text-align: right;
+    }
+
+    .leaderboard-main-score {
+      font-size: 27px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .leaderboard-percent {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 5px;
+      font-weight: 800;
+    }
+
+    .notice {
+      border: 2px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1e3a8a;
+      border-radius: 18px;
+      padding: 14px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .notice.error {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    @media (max-width: 760px) {
+      .live-stats { grid-template-columns: repeat(2, 1fr); }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .scorecard-row { grid-template-columns: 1fr auto; }
+      .scorecard-icons { grid-column: 1 / -1; order: 3; }
+      .leaderboard-card { grid-template-columns: auto 1fr; }
+      .leaderboard-points { grid-column: 1 / -1; text-align: left; display:flex; align-items:baseline; gap:8px; }
+    }
+
     @media (max-width: 760px) {
       .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
       .grid-3 { grid-template-columns: 1fr; }
@@ -974,6 +1247,34 @@
       }
     }
 
+
+    function formatDateSv(dateValue) {
+      if (!dateValue) return "-";
+      try {
+        return new Date(dateValue).toLocaleDateString("sv-SE", { day: "numeric", month: "short", year: "numeric" });
+      } catch {
+        return String(dateValue);
+      }
+    }
+
+    function scorePercent(score, attempts = 54) {
+      return attempts ? Math.round((Number(score || 0) / attempts) * 100) : 0;
+    }
+
+    function getBestSavedScore() {
+      const rows = loadLocalHistoryRows ? loadLocalHistoryRows() : [];
+      if (!rows.length) return 0;
+      return Math.max(...rows.map(row => Number(row.score || 0)));
+    }
+
+    function getScoreComment(score) {
+      if (score >= 50) return "Elitnivå – brutal runda";
+      if (score >= 45) return "Riktigt stark runda";
+      if (score >= 40) return "Stabilt spel";
+      if (score >= 32) return "Bra träningsrunda";
+      return "Bra jobbat – spara rundan och bygg vidare";
+    }
+
     function renderSoloRound() {
       const holeIndex = state.currentSoloHole || 0;
       const hole = state.soloHoles[holeIndex] || state.soloHoles[0];
@@ -985,49 +1286,63 @@
       const progressPercent = Math.round(((holeIndex + 1) / 18) * 100);
 
       if (roundComplete) {
-        dom.soloRoundContainer.innerHTML = `
-          <div class="card">
-            <div style="font-size:30px; font-weight:900; margin-bottom:12px;">🥳 Rundan klar!</div>
-            <div style="color:var(--muted); margin-bottom:14px;">${stats.totalMade}/54 • ${stats.totalPercent}% • HATTRICK ${stats.hattricks} • BOM ${stats.bombs}</div>
+        const bestSavedScore = getBestSavedScore();
+        const isPersonalBest = bestSavedScore > 0 && stats.totalMade > bestSavedScore;
+        const firstSavedRound = bestSavedScore === 0;
+        const resultMessage = isPersonalBest
+          ? `🏆 Nytt personbästa! Tidigare bäst: ${bestSavedScore}/54`
+          : firstSavedRound
+            ? "⭐ Första rundan – spara den som startpunkt"
+            : getScoreComment(stats.totalMade);
 
-            <div class="row grid-4">
-              <div class="card summary-card">
-                <div class="label">Satta</div>
-                <div class="value">${stats.totalMade}/54</div>
-                <div class="sub">Alla puttar</div>
+        dom.soloRoundContainer.innerHTML = `
+          <div class="card result-hero">
+            <div class="result-kicker">Rundan klar</div>
+            <div class="result-score">${stats.totalMade}/54</div>
+            <div class="result-percent">${stats.totalPercent}% träff</div>
+            <div class="result-message">${resultMessage}</div>
+
+            <div class="metric-grid">
+              <div class="metric-card">
+                <div class="metric-label">C1</div>
+                <div class="metric-value">${stats.c1Made}/${stats.c1Attempts}</div>
+                <div class="metric-sub">${stats.c1Percent}%</div>
               </div>
-              <div class="card summary-card">
-                <div class="label">Träffprocent</div>
-                <div class="value">${stats.totalPercent}%</div>
-                <div class="sub">Hela rundan</div>
+              <div class="metric-card">
+                <div class="metric-label">C2</div>
+                <div class="metric-value">${stats.c2Made}/${stats.c2Attempts}</div>
+                <div class="metric-sub">${stats.c2Percent}%</div>
               </div>
-              <div class="card summary-card">
-                <div class="label">C1</div>
-                <div class="value">${stats.c1Made}/${stats.c1Attempts}</div>
-                <div class="sub">${stats.c1Percent}%</div>
+              <div class="metric-card">
+                <div class="metric-label">Hattrick</div>
+                <div class="metric-value">${stats.hattricks}</div>
+                <div class="metric-sub">3/3 på hålet</div>
               </div>
-              <div class="card summary-card">
-                <div class="label">C2</div>
-                <div class="value">${stats.c2Made}/${stats.c2Attempts}</div>
-                <div class="sub">${stats.c2Percent}%</div>
+              <div class="metric-card">
+                <div class="metric-label">Bom</div>
+                <div class="metric-value">${stats.bombs}</div>
+                <div class="metric-sub">0/3 på hålet</div>
               </div>
             </div>
 
-            <div class="row grid-2" style="margin-top:12px;">
+            <div class="row grid-2" style="margin-top:16px; margin-bottom:0;">
               <button class="btn primary" id="roundDoneSaveStatsBtn">Spara min statistik</button>
               <button class="btn" id="roundDoneSaveHighscoreBtn">Spara highscore</button>
             </div>
+          </div>
 
-            <div style="font-size:22px; font-weight:900; margin:18px 0 10px;">Hål för hål</div>
-            <div style="display:grid; gap:10px;">
+          <div class="card" style="margin-top:14px;">
+            <div style="font-size:22px; font-weight:900; margin-bottom:10px;">Hål för hål</div>
+            <div class="scorecard-grid">
               ${state.soloHoles.map((h, i) => {
                 const holeMade = h.results.filter(v => v === true).length;
                 const icons = h.results.map(v => v === true ? "✅" : "❌").join(" ");
                 const extra = holeMade === 3 ? " 🏆" : holeMade === 0 ? " 💥" : "";
-                return `<div class="standing-row">
-                  <div class="standing-name">Hål ${i + 1}${extra}</div>
-                  <div>${icons}</div>
-                  <div class="standing-score">${holeMade}/3</div>
+                const rowClass = holeMade === 3 ? " perfect" : holeMade === 0 ? " bom-row" : "";
+                return `<div class="scorecard-row${rowClass}">
+                  <div class="scorecard-title">Hål ${i + 1}${extra}</div>
+                  <div class="scorecard-icons">${icons}</div>
+                  <div class="scorecard-score">${holeMade}/3</div>
                 </div>`;
               }).join("")}
             </div>
@@ -1037,32 +1352,32 @@
       }
 
       dom.soloRoundContainer.innerHTML = `
-        <div class="card" style="margin-bottom:14px;">
+        <div class="card live-card">
           <div style="display:flex; justify-content:space-between; font-weight:900; margin-bottom:8px;">
             <span>Hål ${holeIndex + 1} / 18</span>
             <span>${progressPercent}%</span>
           </div>
 
-          <div style="height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin-bottom:12px;">
-            <div style="height:100%; width:${progressPercent}%; background:#0f172a; border-radius:999px;"></div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${progressPercent}%;"></div>
           </div>
 
-          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center;">
+          <div class="live-stats">
             <div>
-              <div style="font-size:20px; font-weight:900;">${stats.totalMade}/${stats.totalAttempts}</div>
-              <div style="color:var(--muted); font-size:12px;">Satta</div>
+              <div class="live-stat-value">${stats.totalMade}/${stats.totalAttempts}</div>
+              <div class="live-stat-label">Satta</div>
             </div>
             <div>
-              <div style="font-size:20px; font-weight:900;">${stats.totalPercent}%</div>
-              <div style="color:var(--muted); font-size:12px;">Träff</div>
+              <div class="live-stat-value">${stats.totalPercent}%</div>
+              <div class="live-stat-label">Träff</div>
             </div>
             <div>
-              <div style="font-size:20px; font-weight:900;">${stats.c1Percent}%</div>
-              <div style="color:var(--muted); font-size:12px;">C1 ${stats.c1Made}/${stats.c1Attempts}</div>
+              <div class="live-stat-value">${stats.c1Percent}%</div>
+              <div class="live-stat-label">C1 ${stats.c1Made}/${stats.c1Attempts}</div>
             </div>
             <div>
-              <div style="font-size:20px; font-weight:900;">${stats.c2Percent}%</div>
-              <div style="color:var(--muted); font-size:12px;">C2 ${stats.c2Made}/${stats.c2Attempts}</div>
+              <div class="live-stat-value">${stats.c2Percent}%</div>
+              <div class="live-stat-label">C2 ${stats.c2Made}/${stats.c2Attempts}</div>
             </div>
           </div>
         </div>
@@ -1232,7 +1547,7 @@
 
     function renderLeaderboard(rows) {
       if (!rows || !rows.length) {
-        dom.leaderboardList.innerHTML = `<div style="color: var(--muted);">Ingen highscore sparad ännu.</div>`;
+        dom.leaderboardList.innerHTML = `<div class="notice">Ingen highscore sparad ännu.</div>`;
         return;
       }
 
@@ -1240,21 +1555,23 @@
 
       dom.leaderboardList.innerHTML = topRows.map((row, index) => {
         const player = row.name || "Anonym";
-        const date = row.played_at || new Date(row.created_at).toLocaleDateString("sv-SE");
+        const date = row.played_at || row.created_at;
+        const percent = scorePercent(row.score, 54);
 
         const medalClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : "";
         const medalEmoji = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`;
 
         return `
-          <div class="leaderboard-row ${medalClass}">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div class="leaderboard-rank ${medalClass}">${medalEmoji}</div>
-              <div>
-                <div style="font-weight:800;">${player}</div>
-                <div class="leaderboard-meta">${date}</div>
-              </div>
+          <div class="leaderboard-card ${medalClass}">
+            <div class="leaderboard-medal">${medalEmoji}</div>
+            <div>
+              <div class="leaderboard-name">${player}</div>
+              <div class="leaderboard-date">${formatDateSv(date)}</div>
             </div>
-            <div class="leaderboard-score">${row.score}</div>
+            <div class="leaderboard-points">
+              <div class="leaderboard-main-score">${row.score}/54</div>
+              <div class="leaderboard-percent">${percent}%</div>
+            </div>
           </div>
         `;
       }).join("");
@@ -1268,18 +1585,23 @@
 
       dom.leaderboardList.innerHTML = `<div style="color: var(--muted);">Laddar highscore...</div>`;
 
-      const { data, error } = await db
-        .from("scores")
-        .select("id, score, created_at, name, played_at")
-        .order("created_at", { ascending: true });
+      try {
+        const { data, error } = await db
+          .from("scores")
+          .select("id, score, created_at, name, played_at")
+          .order("created_at", { ascending: true });
 
-      if (error) {
-        dom.leaderboardList.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda highscore: ${error.message}</div>`;
-        return;
+        if (error) throw error;
+
+        leaderboardCache = data || [];
+        renderLeaderboard(leaderboardCache);
+      } catch (error) {
+        dom.leaderboardList.innerHTML = `
+          <div class="notice error">
+            Highscore är tillfälligt otillgänglig. Rundan finns kvar på din enhet och du kan försöka igen senare.
+          </div>
+        `;
       }
-
-      leaderboardCache = data || [];
-      renderLeaderboard(leaderboardCache);
     }
 
     async function saveCurrentScoreToHighscore() {
@@ -1288,19 +1610,19 @@
         const score = stats.totalMade;
         const name = (state.playerName || "").trim() || "Anonym";
         const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
-await ensureSignedIn();
-console.log("Inloggad anonymt");
-        const { error } = await db.from("scores").insert([{ score, name, played_at }]);
 
-        if (error) {
-          alert("Fel när highscore skulle sparas: " + error.message);
+        try {
+          const { error } = await db.from("scores").insert([{ score, name, played_at }]);
+          if (error) throw error;
+
+          leaderboardCache = null;
+          alert("Highscore sparad!");
+          loadLeaderboard(true);
+          return;
+        } catch (error) {
+          alert("Highscore är tillfälligt otillgänglig. Din runda finns kvar på enheten. Försök igen om en stund.");
           return;
         }
-
-        leaderboardCache = null;
-        alert("Highscore sparad!");
-        loadLeaderboard(true);
-        return;
       }
 
       const rows = Array.from({ length: state.groupCount }, (_, index) => {
@@ -1312,16 +1634,16 @@ console.log("Inloggad anonymt");
         };
       });
 
-      const { error } = await db.from("scores").insert(rows);
+      try {
+        const { error } = await db.from("scores").insert(rows);
+        if (error) throw error;
 
-      if (error) {
-        alert("Fel när gruppresultat skulle sparas: " + error.message);
-        return;
+        leaderboardCache = null;
+        alert("Gruppresultat sparat!");
+        loadLeaderboard(true);
+      } catch (error) {
+        alert("Highscore är tillfälligt otillgänglig. Gruppresultatet finns kvar i rundan. Försök igen om en stund.");
       }
-
-      leaderboardCache = null;
-      alert("Gruppresultat sparat!");
-      loadLeaderboard(true);
     }
 
     function buildSoloHistoryRow(userId) {
@@ -1749,27 +2071,36 @@ console.log("Inloggad anonymt");
 
     renderAll();
     loadLeaderboard();
-  </script>
-  <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").then((registration) => {
-      registration.update();
 
-      if (registration.waiting) {
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
-      }
+    // Tvingar PWA/hemskärmsappen att hämta ny version efter deploy
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          const registration = await navigator.serviceWorker.register('/sw.js?v=2026-06-23-01');
+          await registration.update();
 
-      registration.addEventListener("updatefound", () => {
-        const newWorker = registration.installing;
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (!newWorker) return;
 
-        newWorker.addEventListener("statechange", () => {
-          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-            window.location.reload();
-          }
-        });
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                newWorker.postMessage({ type: 'SKIP_WAITING' });
+              }
+            });
+          });
+        } catch (error) {
+          console.warn('Service worker kunde inte uppdateras:', error);
+        }
       });
-    });
-  }
-</script>
+
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (window.__reloadingForNewVersion) return;
+        window.__reloadingForNewVersion = true;
+        window.location.reload();
+      });
+    }
+
+  </script>
 </body>
 </html>

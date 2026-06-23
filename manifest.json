@@ -1,10 +1,20 @@
 {
-  "name": "Puttingbana",
-  "short_name": "Putting",
+  "name": "Vetlanda Puttingbana",
+  "short_name": "Puttingbana",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#0f172a",
-  "description": "Puttingbana med HATTRICK, C1/C2, highscore och flera spelare.",
-  "icons": []
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
