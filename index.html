@@ -618,7 +618,6 @@
       const { data, error } = await db.auth.signInAnonymously();
 
       if (error) {
-        alert("Kunde inte skapa privat användare: " + error.message);
         throw error;
       }
 
@@ -626,6 +625,7 @@
     }
 
     const STORAGE_KEY = "puttingbana_group_v4";
+    const LOCAL_HISTORY_KEY = "puttingbana_private_history_v1";
     let leaderboardCache = null;
     let saveTimer = null;
 
@@ -688,6 +688,7 @@
         groupCount: 2,
         groupNames: ["", "", "", ""],
         currentGroupHole: 0,
+        currentSoloHole: 0,
         soloHoles: makeSoloHoles(),
         groupHoles: makeGroupHoles(2)
       };
@@ -711,6 +712,7 @@
             ? [...parsed.groupNames, "", "", "", ""].slice(0, 4)
             : ["", "", "", ""],
           currentGroupHole: Number.isInteger(parsed.currentGroupHole) ? parsed.currentGroupHole : 0,
+          currentSoloHole: Number.isInteger(parsed.currentSoloHole) ? parsed.currentSoloHole : 0,
           soloHoles: Array.isArray(parsed.soloHoles) ? parsed.soloHoles : makeSoloHoles(),
           groupHoles: Array.isArray(parsed.groupHoles) ? parsed.groupHoles : makeGroupHoles(playerCount)
         };
@@ -739,6 +741,7 @@
     function clearRoundPreserveMeta() {
       if (state.mode === "solo") {
         state.soloHoles = makeSoloHoles();
+        state.currentSoloHole = 0;
       } else {
         state.groupHoles = makeGroupHoles(state.groupCount);
         state.currentGroupHole = 0;
@@ -972,37 +975,129 @@
     }
 
     function renderSoloRound() {
-      dom.soloRoundContainer.innerHTML = state.soloHoles.map((hole, holeIndex) => {
-        const made = hole.results.filter(v => v === true).length;
-        const missed = hole.results.filter(v => v === false).length;
+      const holeIndex = state.currentSoloHole || 0;
+      const hole = state.soloHoles[holeIndex] || state.soloHoles[0];
+      const made = hole.results.filter(v => v === true).length;
+      const missed = hole.results.filter(v => v === false).length;
+      const stats = getSoloStats();
+      const isComplete = hole.results.every(v => v !== null);
+      const roundComplete = state.soloHoles.every(h => h.results.every(v => v !== null));
+      const progressPercent = Math.round(((holeIndex + 1) / 18) * 100);
 
-        return `
-          <div class="card hole-card${made === 3 ? " hattrick" : ""}${missed === 3 ? " bom" : ""}">
-            <div class="hole-header">
-              <div class="hole-title">Hål ${holeIndex + 1}</div>
-              <div class="badges">
-                <div class="badge">${made}/3</div>
-                ${made === 3 ? `<div class="badge hattrick">🏆 HATTRICK</div>` : ""}
-                ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
+      if (roundComplete) {
+        dom.soloRoundContainer.innerHTML = `
+          <div class="card">
+            <div style="font-size:30px; font-weight:900; margin-bottom:12px;">🥳 Rundan klar!</div>
+            <div style="color:var(--muted); margin-bottom:14px;">${stats.totalMade}/54 • ${stats.totalPercent}% • HATTRICK ${stats.hattricks} • BOM ${stats.bombs}</div>
+
+            <div class="row grid-4">
+              <div class="card summary-card">
+                <div class="label">Satta</div>
+                <div class="value">${stats.totalMade}/54</div>
+                <div class="sub">Alla puttar</div>
+              </div>
+              <div class="card summary-card">
+                <div class="label">Träffprocent</div>
+                <div class="value">${stats.totalPercent}%</div>
+                <div class="sub">Hela rundan</div>
+              </div>
+              <div class="card summary-card">
+                <div class="label">C1</div>
+                <div class="value">${stats.c1Made}/${stats.c1Attempts}</div>
+                <div class="sub">${stats.c1Percent}%</div>
+              </div>
+              <div class="card summary-card">
+                <div class="label">C2</div>
+                <div class="value">${stats.c2Made}/${stats.c2Attempts}</div>
+                <div class="sub">${stats.c2Percent}%</div>
               </div>
             </div>
 
-            ${hole.distances.map((distance, puttIndex) => {
-              const result = hole.results[puttIndex];
-              return `
-                <div class="putt-card${result === true ? " hit" : ""}${result === false ? " miss" : ""}">
-                  <div class="distance">${distance} m</div>
-                  <div class="putt-actions">
-                    <button class="btn-hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
-                    <button class="btn-miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
-                  </div>
-                  <button class="btn-reset" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
-                </div>
-              `;
-            }).join("")}
+            <div class="row grid-2" style="margin-top:12px;">
+              <button class="btn primary" id="roundDoneSaveStatsBtn">Spara min statistik</button>
+              <button class="btn" id="roundDoneSaveHighscoreBtn">Spara highscore</button>
+            </div>
+
+            <div style="font-size:22px; font-weight:900; margin:18px 0 10px;">Hål för hål</div>
+            <div style="display:grid; gap:10px;">
+              ${state.soloHoles.map((h, i) => {
+                const holeMade = h.results.filter(v => v === true).length;
+                const icons = h.results.map(v => v === true ? "✅" : "❌").join(" ");
+                const extra = holeMade === 3 ? " 🏆" : holeMade === 0 ? " 💥" : "";
+                return `<div class="standing-row">
+                  <div class="standing-name">Hål ${i + 1}${extra}</div>
+                  <div>${icons}</div>
+                  <div class="standing-score">${holeMade}/3</div>
+                </div>`;
+              }).join("")}
+            </div>
           </div>
         `;
-      }).join("");
+        return;
+      }
+
+      dom.soloRoundContainer.innerHTML = `
+        <div class="card" style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; font-weight:900; margin-bottom:8px;">
+            <span>Hål ${holeIndex + 1} / 18</span>
+            <span>${progressPercent}%</span>
+          </div>
+
+          <div style="height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin-bottom:12px;">
+            <div style="height:100%; width:${progressPercent}%; background:#0f172a; border-radius:999px;"></div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center;">
+            <div>
+              <div style="font-size:20px; font-weight:900;">${stats.totalMade}/${stats.totalAttempts}</div>
+              <div style="color:var(--muted); font-size:12px;">Satta</div>
+            </div>
+            <div>
+              <div style="font-size:20px; font-weight:900;">${stats.totalPercent}%</div>
+              <div style="color:var(--muted); font-size:12px;">Träff</div>
+            </div>
+            <div>
+              <div style="font-size:20px; font-weight:900;">${stats.c1Percent}%</div>
+              <div style="color:var(--muted); font-size:12px;">C1 ${stats.c1Made}/${stats.c1Attempts}</div>
+            </div>
+            <div>
+              <div style="font-size:20px; font-weight:900;">${stats.c2Percent}%</div>
+              <div style="color:var(--muted); font-size:12px;">C2 ${stats.c2Made}/${stats.c2Attempts}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-hole-nav">
+          <button class="btn" id="prevSoloHoleBtn" ${holeIndex === 0 ? "disabled" : ""}>← Föregående hål</button>
+          <div class="card" style="display:flex; align-items:center; justify-content:center; font-weight:900;">Hål ${holeIndex + 1} av 18</div>
+          <button class="btn" id="nextSoloHoleBtn" ${holeIndex === 17 || !isComplete ? "disabled" : ""}>Nästa hål →</button>
+        </div>
+
+        <div class="card hole-card${made === 3 ? " hattrick" : ""}${missed === 3 ? " bom" : ""}">
+          <div class="hole-header">
+            <div class="hole-title">Hål ${holeIndex + 1}</div>
+            <div class="badges">
+              <div class="badge">${made}/3</div>
+              ${made === 3 ? `<div class="badge hattrick">🏆 HATTRICK</div>` : ""}
+              ${missed === 3 ? `<div class="badge bom">💥 BOM</div>` : ""}
+            </div>
+          </div>
+
+          ${hole.distances.map((distance, puttIndex) => {
+            const result = hole.results[puttIndex];
+            return `
+              <div class="putt-card${result === true ? " hit" : ""}${result === false ? " miss" : ""}">
+                <div class="distance">${distance} m</div>
+                <div class="putt-actions">
+                  <button class="btn-hit ${result === true ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="hit">Träff</button>
+                  <button class="btn-miss ${result === false ? "active" : ""}" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="miss">Miss</button>
+                </div>
+                <button class="btn-reset" data-hole="${holeIndex}" data-putt="${puttIndex}" data-value="reset">Rensa</button>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
     }
 
     function renderGroupRound() {
@@ -1193,7 +1288,8 @@
         const score = stats.totalMade;
         const name = (state.playerName || "").trim() || "Anonym";
         const played_at = state.playedAt || new Date().toISOString().slice(0, 10);
-
+await ensureSignedIn();
+console.log("Inloggad anonymt");
         const { error } = await db.from("scores").insert([{ score, name, played_at }]);
 
         if (error) {
@@ -1274,16 +1370,56 @@
       });
     }
 
+    function loadLocalHistoryRows() {
+      try {
+        return JSON.parse(localStorage.getItem(LOCAL_HISTORY_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveLocalHistoryRows(rows) {
+      localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(rows));
+    }
+
+    function saveRoundToLocalHistory(rows) {
+      const existing = loadLocalHistoryRows();
+      const now = new Date().toISOString();
+      const cleanRows = rows.map(row => ({
+        ...row,
+        id: `local-${now}-${Math.random().toString(16).slice(2)}`,
+        user_id: "local",
+        created_at: now
+      }));
+      saveLocalHistoryRows([...cleanRows, ...existing].slice(0, 200));
+      return cleanRows;
+    }
+
     async function saveCurrentRoundToHistory() {
-      const user = await ensureSignedIn();
+      let user = null;
+      try {
+        user = await ensureSignedIn();
+      } catch {
+        user = { id: "local" };
+      }
+
       const rows = state.mode === "solo"
         ? [buildSoloHistoryRow(user.id)]
         : buildGroupHistoryRows(user.id);
 
+      saveRoundToLocalHistory(rows);
+
+      if (user.id === "local") {
+        alert("Din statistik är sparad lokalt. Highscore kan fortfarande sparas med knappen Spara highscore.");
+        if (document.getElementById("section-stats").classList.contains("active")) loadMyHistory();
+        return;
+      }
+
       const { error } = await db.from("round_history").insert(rows);
 
       if (error) {
-        alert("Fel när privat statistik skulle sparas: " + error.message);
+        alert("Din statistik är sparad lokalt, men kunde inte sparas i molnet: " + error.message);
+        if (document.getElementById("section-stats").classList.contains("active")) loadMyHistory();
         return;
       }
 
@@ -1396,21 +1532,28 @@
       dom.statsSummaryCards.innerHTML = "";
       dom.statsHistoryList.innerHTML = `<div style="color: var(--muted);">Laddar privat statistik...</div>`;
 
-      const user = await ensureSignedIn();
+      const localRows = loadLocalHistoryRows();
 
-      const { data, error } = await db
-        .from("round_history")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("played_at", { ascending: false })
-        .order("created_at", { ascending: false });
+      try {
+        const user = await ensureSignedIn();
+        const { data, error } = await db
+          .from("round_history")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("played_at", { ascending: false })
+          .order("created_at", { ascending: false });
 
-      if (error) {
-        dom.statsHistoryList.innerHTML = `<div style="color:#b91c1c;">Kunde inte ladda statistik: ${error.message}</div>`;
-        return;
+        if (error) throw error;
+
+        const rows = [...(data || []), ...localRows].sort((a, b) => {
+          const aDate = new Date(a.played_at || a.created_at || 0).getTime();
+          const bDate = new Date(b.played_at || b.created_at || 0).getTime();
+          return bDate - aDate;
+        });
+        renderMyStats(rows);
+      } catch {
+        renderMyStats(localRows);
       }
-
-      renderMyStats(data || []);
     }
 
     function activateTab(tabName) {
@@ -1534,6 +1677,34 @@
     });
 
     dom.soloRoundContainer.addEventListener("click", (e) => {
+      const saveStatsBtn = e.target.closest("#roundDoneSaveStatsBtn");
+      if (saveStatsBtn) {
+        saveCurrentRoundToHistory();
+        return;
+      }
+
+      const saveHighscoreBtn = e.target.closest("#roundDoneSaveHighscoreBtn");
+      if (saveHighscoreBtn) {
+        saveCurrentScoreToHighscore();
+        return;
+      }
+
+      const prevBtn = e.target.closest("#prevSoloHoleBtn");
+      if (prevBtn && state.currentSoloHole > 0) {
+        state.currentSoloHole -= 1;
+        saveState();
+        renderAll();
+        return;
+      }
+
+      const nextBtn = e.target.closest("#nextSoloHoleBtn");
+      if (nextBtn && state.currentSoloHole < 17) {
+        state.currentSoloHole += 1;
+        saveState();
+        renderAll();
+        return;
+      }
+
       const btn = e.target.closest("button[data-hole]");
       if (!btn) return;
 
@@ -1578,7 +1749,27 @@
 
     renderAll();
     loadLeaderboard();
-    ensureSignedIn().catch(() => {});
   </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").then((registration) => {
+      registration.update();
+
+      if (registration.waiting) {
+        registration.waiting.postMessage({ type: "SKIP_WAITING" });
+      }
+
+      registration.addEventListener("updatefound", () => {
+        const newWorker = registration.installing;
+
+        newWorker.addEventListener("statechange", () => {
+          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+            window.location.reload();
+          }
+        });
+      });
+    });
+  }
+</script>
 </body>
 </html>

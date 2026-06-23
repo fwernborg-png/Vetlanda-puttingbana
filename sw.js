@@ -1,17 +1,24 @@
-const CACHE_NAME = "puttingbana-cache-v1";
-const URLS = ["./", "./index.html", "./manifest.json"];
-self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(URLS)));
+const CACHE_NAME = "puttingbana-v2-2026-06-23";
+
+self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
-self.addEventListener("activate", event => {
+
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.map(key => key !== CACHE_NAME ? caches.delete(key) : Promise.resolve())))
+    caches.keys().then((names) =>
+      Promise.all(
+        names.map((name) => {
+          if (name !== CACHE_NAME) return caches.delete(name);
+        })
+      )
+    )
   );
   self.clients.claim();
 });
-self.addEventListener("fetch", event => {
+
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(resp => resp || fetch(event.request))
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
