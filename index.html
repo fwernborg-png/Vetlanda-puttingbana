@@ -1041,7 +1041,7 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    function saveStateDebounced(delay = 250) {
+    function saveStateDebounced(delay = 3000) {
       clearTimeout(saveTimer);
       saveTimer = setTimeout(saveState, delay);
     }
@@ -2144,7 +2144,7 @@
 setTimeout(() => {
   const splash = document.getElementById("splashScreen");
   if (splash) splash.classList.add("hide");
-}, 2000);
+}, 3000);
   </script>
 </body>
 </html>
