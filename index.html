@@ -826,8 +826,10 @@
 <meta name="application-name" content="Vetlanda Puttingbana">
 <meta name="theme-color" content="#050805">
 </head>
-<body>
-  <div id="splashScreen" class="splash-screen" aria-hidden="true"></div>
+<body class="loading">
+    <div id="splashScreen" class="splash-screen" aria-hidden="true"></div>
+  <div id="splashScreen" class="splash-screen"></div>
+
   <div class="app">
     <div class="topbar">
       <div class="title">Puttingbana</div>
@@ -2144,6 +2146,12 @@
 setTimeout(() => {
   const splash = document.getElementById("splashScreen");
   if (splash) splash.classList.add("hide");
+
+  document.body.classList.remove("loading");
+
+  setTimeout(() => {
+    if (splash) splash.remove();
+  }, 600);
 }, 3000);
   </script>
 </body>
