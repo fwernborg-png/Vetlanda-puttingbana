@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="sv">
-  <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" href="favicon-32.png">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vetlanda Puttingbana">
-<meta name="theme-color" content="#111111">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#050805" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Vetlanda Puttingbana">
+  <meta name="application-name" content="Vetlanda Puttingbana">
   <title>Puttingbana</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="preload" as="image" href="/splash.png">
 
   <style>
     :root {
@@ -53,10 +53,23 @@
       color: var(--text);
     }
 
+    body.loading {
+      background: #050805;
+    }
+
+    body.loading .app {
+      visibility: hidden;
+    }
+
     .app {
       max-width: 980px;
       margin: 0 auto;
       padding: 18px 14px 40px;
+      visibility: hidden;
+    }
+
+    body.app-ready .app {
+      visibility: visible;
     }
 
     .topbar { margin-bottom: 14px; }
@@ -788,12 +801,26 @@
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background:
-    linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08)),
-    url("/splash.png") center center / cover no-repeat;
+  background-color: #050805;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.splash-image {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08)),
+    url("/splash.png") center center / cover no-repeat;
+  opacity: 0;
+  will-change: opacity;
+  animation: splashImageIn 260ms ease-out 60ms forwards;
+}
+
+@keyframes splashImageIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .splash-screen.hide {
@@ -803,31 +830,17 @@
 }
 
 @media (min-width: 700px) {
-  .splash-screen {
+  .splash-image {
     background-size: contain;
     background-color: #050805;
   }
 }
   </style>
-  <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vetlanda Puttingbana">
-<meta name="application-name" content="Vetlanda Puttingbana">
-<meta name="theme-color" content="#0f172a">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vetlanda Puttingbana">
-<meta name="application-name" content="Vetlanda Puttingbana">
-<meta name="theme-color" content="#050805">
 </head>
 <body class="loading">
-  <div id="splashScreen" class="splash-screen"></div>
+  <div id="splashScreen" class="splash-screen">
+    <div class="splash-image" aria-hidden="true"></div>
+  </div>
 
   <div class="app">
     <div class="topbar">
@@ -1555,35 +1568,13 @@
       }
     }
 
-    function getBestPerPlayer(rows) {
-      const bestMap = new Map();
-
-      rows.forEach((row) => {
-        const player = (row.name || "Anonym").trim();
-        const existing = bestMap.get(player);
-
-        if (!existing) {
-          bestMap.set(player, row);
-          return;
-        }
-
-        if (row.score > existing.score) {
-          bestMap.set(player, row);
-          return;
-        }
-
-        if (row.score === existing.score) {
-          const rowDate = new Date(row.created_at).getTime();
-          const existingDate = new Date(existing.created_at).getTime();
-          if (rowDate < existingDate) {
-            bestMap.set(player, row);
-          }
-        }
-      });
-
-      return Array.from(bestMap.values()).sort((a, b) => {
+    function sortLeaderboardRows(rows) {
+      return [...rows].sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
-        return new Date(a.created_at) - new Date(b.created_at);
+
+        const aDate = new Date(a.played_at || a.created_at || 0).getTime();
+        const bDate = new Date(b.played_at || b.created_at || 0).getTime();
+        return bDate - aDate;
       });
     }
 
@@ -1593,9 +1584,9 @@
         return;
       }
 
-      const topRows = getBestPerPlayer(rows).slice(0, 10);
+      const sortedRows = sortLeaderboardRows(rows);
 
-      dom.leaderboardList.innerHTML = topRows.map((row, index) => {
+      dom.leaderboardList.innerHTML = sortedRows.map((row, index) => {
         const player = row.name || "Anonym";
         const date = row.played_at || row.created_at;
         const percent = scorePercent(row.score, 54);
@@ -2118,7 +2109,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
-          const registration = await navigator.serviceWorker.register('/sw.js?v=2026-06-23-01');
+          const registration = await navigator.serviceWorker.register('/sw.js?v=2026-07-12-02');
           await registration.update();
 
           registration.addEventListener('updatefound', () => {
@@ -2147,6 +2138,7 @@ setTimeout(() => {
   if (splash) splash.classList.add("hide");
 
   document.body.classList.remove("loading");
+  document.body.classList.add("app-ready");
 
   setTimeout(() => {
     if (splash) splash.remove();
