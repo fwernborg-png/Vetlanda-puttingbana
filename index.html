@@ -954,6 +954,7 @@
 
     const STORAGE_KEY = "puttingbana_group_v4";
     const LOCAL_HISTORY_KEY = "puttingbana_private_history_v1";
+    const MAX_LEADERBOARD_ENTRIES = 10;
     let leaderboardCache = null;
     let saveTimer = null;
 
@@ -1584,7 +1585,7 @@
         return;
       }
 
-      const sortedRows = sortLeaderboardRows(rows);
+      const sortedRows = sortLeaderboardRows(rows).slice(0, MAX_LEADERBOARD_ENTRIES);
 
       dom.leaderboardList.innerHTML = sortedRows.map((row, index) => {
         const player = row.name || "Anonym";
